@@ -83,9 +83,17 @@ task Collect -depends Init {
 }
 
 task Pack -depends Collect {
-    #& $nugetExe pack $nuspecFile -Version $script:fullVersion -OutputDirectory $outputDir
+    $nuspecFiles = gci $scriptDir -include *.nuspec
+    foreach ($nuspecFile in $nuspecFiles)
+    {
+        & $nugetExe pack $nuspecFile -Version $script:fullVersion -OutputDirectory $outputDir
+    }
 }
 
 task Publish -depends Pack {
-    #& $nugetExe push "$outputDir\icrawl.$fullVersion.nupkg"
+    $nupackages = gci $outputDir -include *.nupkg
+    foreach ($nupackage in $nupackages)
+    {
+        #& $nugetExe push $nupackage
+    }
 }
