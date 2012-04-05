@@ -28,11 +28,13 @@ properties {
     $nunitFolder = "$baseDir\packages\NUnit.2.5.10.11092\tools"
     $nunitExe = "$nunitFolder\nunit-console.exe"
     $nugetExe = "$baseDir\.nuget\nuget.exe"
+    $appcmd = "C:\windows\system32\inetsrv\appcmd.exe"
+    $defaultWebsitePort = 8100
 }
 
-task default -depends Collect
+task default -depends Install
 
-task Clean {
+task Clean -depends UnmountWebsites {
     if (Test-Path $outputDir)
     {
         rmdir -force -recurse $outputDir
@@ -66,16 +68,16 @@ task Compile -depends Init {
 
 task Test -depends Compile {
     $testProjects = gci $testDir | Where-Object {$_.Name.EndsWith(".Tests")}
-    "Found the following test projects: $testProjects"
+    "Testing with the following test projects: $testProjects"
     foreach ($testProject in $testProjects)
     {
         Run-Test $testProject $outputDir
     }
 }
 
-task Collect -depends Init {
+task Collect -depends Compile {
     $webProjects = gci $srcDir | Where-Object {$_.Name.EndsWith(".Web")}
-    "Found the following web projects: $webProjects"
+    "Collecting the following web projects: $webProjects"
     foreach ($webProject in $webProjects)
     {
         Copy-WebApplication $srcDir $webProject $collectDir
@@ -84,6 +86,7 @@ task Collect -depends Init {
 
 task Pack -depends Collect {
     $nuspecFiles = gci $scriptDir -include *.nuspec
+    "Packaging for the following nuspecs: $nuspecFiles"
     foreach ($nuspecFile in $nuspecFiles)
     {
         & $nugetExe pack $nuspecFile -Version $script:fullVersion -OutputDirectory $outputDir
@@ -92,8 +95,51 @@ task Pack -depends Collect {
 
 task Publish -depends Pack {
     $nupackages = gci $outputDir -include *.nupkg
+    "Publishing the following NuGet packages: $nupackages"
     foreach ($nupackage in $nupackages)
     {
         #& $nugetExe push $nupackage
+    }
+}
+
+function GetWebProjects
+{
+    return gci $collectDir | Where-Object {$_.Name.EndsWith(".Web")}
+}
+
+task UnmountWebsites {
+    if (!(Test-Path $collectDir))
+    {
+        return
+    }
+
+    $webProjects = GetWebProjects
+    if (!$webProjects)
+    {
+        return
+    }
+
+    foreach ($webProject in $webProjects)
+    {
+        $webProjectName = $webProject.Name
+        $existing = (& $appcmd list site $webProjectName)
+        if ($existing)
+        {
+            "Unmounts existing site $webProjectName."
+            exec { & $appcmd delete site $webProjectName }
+        }
+    }
+}
+
+task Install -depends Collect, UnmountWebsites {
+    $webProjects = GetWebProjects
+    $websitePort = $defaultWebsitePort
+    foreach ($webProject in $webProjects)
+    {
+        $webProjectName = $webProject.Name
+        $physicalPath = $webProject.FullName
+        "Mounts the web project $webProjectName at port $websitePort."
+        exec { & $appcmd add site /name:$webProjectName /bindings:http://*:$websitePort /physicalPath:$physicalPath }
+        $websitePort++
     }
 }
