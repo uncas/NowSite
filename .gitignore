@@ -1,0 +1,7 @@
+packages/
+Debug/
+Release/
+bin/
+*.csproj.user
+*.suo
+Scripts/
