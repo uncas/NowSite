@@ -7,3 +7,4 @@ bin/
 /src/Uncas.NowSite.Web/Scripts/
 *~
 /src/VersionInfo.cs
+output/
