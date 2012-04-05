@@ -65,12 +65,17 @@ task Compile -depends Init {
 }
 
 task Test -depends Compile {
-    Run-Test "Uncas.NowSite.Tests" $outputDir
+    $testProjects = gci $testDir | Where-Object {$_.Name.EndsWith(".Tests")}
+    "Found the following test projects: $testProjects"
+    foreach ($testProject in $testProjects)
+    {
+        Run-Test $testProject $outputDir
+    }
 }
 
 task Collect -depends Init {
-    $webProjects = gci $srcDir | Where-Object {$_.Name.Contains(".Web")}
-    "Web projects: $webProjects"
+    $webProjects = gci $srcDir | Where-Object {$_.Name.EndsWith(".Web")}
+    "Found the following web projects: $webProjects"
     foreach ($webProject in $webProjects)
     {
         Copy-WebApplication $srcDir $webProject $collectDir
