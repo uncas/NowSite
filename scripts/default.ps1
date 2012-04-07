@@ -28,7 +28,6 @@ properties {
     $nunitFolder = "$baseDir\packages\NUnit.2.5.10.11092\tools"
     $nunitExe = "$nunitFolder\nunit-console.exe"
     $nugetExe = "$baseDir\.nuget\nuget.exe"
-    $appcmd = "C:\windows\system32\inetsrv\appcmd.exe"
     $defaultWebsitePort = 8100
 }
 
