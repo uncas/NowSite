@@ -1,5 +1,7 @@
 # Original from https://github.com/ayende/rhino-mocks/blob/master/psake_ext.ps1
 
+$appcmd = "C:\windows\system32\inetsrv\appcmd.exe"
+
 function Get-Git-Commit
 {
     $gitLog = git log --oneline -1
@@ -94,4 +96,29 @@ function Copy-WebApplication {
 
     $webProjectFile = "$sourceParentFolder\$webApplicationName\$webApplicationName.csproj"
     msbuild $webProjectFile /p:Configuration=$configuration /p:WebProjectOutputDir=$collectDir\$webApplicationName\ /p:OutDir=$destinationParentFolder\$webApplicationName\bin\ /t:ResolveReferences /t:_CopyWebApplication
+}
+
+function Delete-Site {
+    param (
+        [string]$siteName = $(throw "site name is required")
+    )
+    if (!(Get-Site $siteName)) { return }
+    "Unmounts existing site $webProjectName."
+    exec { & $appcmd delete site $siteName }
+}
+
+function Get-Site {
+    param (
+        [string]$siteName = $(throw "site name is required")
+    )
+    exec { & $appcmd list site $siteName }
+}
+
+function Add-Site {
+    param (
+        [string]$siteName = $(throw "site name is required"),
+        [string]$physicalPath = $(throw "physical path is required"),
+        [string]$bindings = $(throw "bindings are required")
+    )
+    exec { & $appcmd add site /name:$siteName /bindings:$bindings /physicalPath:$physicalPath }
 }

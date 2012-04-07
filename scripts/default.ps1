@@ -171,11 +171,7 @@ task UnmountWebsites {
     if (!$webProjects) { return }
     foreach ($webProject in $webProjects)
     {
-        $webProjectName = $webProject.Name
-        $existing = (& $appcmd list site $webProjectName)
-        if (!$existing) { continue }
-        "Unmounts existing site $webProjectName."
-        exec { & $appcmd delete site $webProjectName }
+        Delete-Site $webProject.Name
     }
 }
 
@@ -188,7 +184,7 @@ task Install -depends Collect, UnmountWebsites {
         $webProjectName = $webProject.Name
         $physicalPath = $webProject.FullName
         "Mounts the web project $webProjectName at port $websitePort."
-        exec { & $appcmd add site /name:$webProjectName /bindings:http://*:$websitePort /physicalPath:$physicalPath }
+        Add-Site $webProjectName $physicalPath "http://*:$websitePort"
         $websitePort++
     }
 }
