@@ -32,9 +32,13 @@ properties {
     $defaultWebsitePort = 8100
 }
 
-task default -depends Install, TestPacks
+task default -depends Install, TestPacks, Test
 
 task Clean -depends UnmountWebsites {
+    if (Test-Path $collectDir)
+    {
+        rmdir -force -recurse $collectDir
+    }
     if (Test-Path $outputDir)
     {
         rmdir -force -recurse $outputDir
@@ -67,7 +71,9 @@ task Compile -depends Init {
 }
 
 task Test -depends Compile {
+    if (!(Test-Path $testDir)) { return }
     $testProjects = gci $testDir | Where-Object {$_.Name.EndsWith(".Tests")}
+    if (!$testProjects) { return }
     "Testing with the following test projects: $testProjects"
     foreach ($testProject in $testProjects)
     {
@@ -77,6 +83,7 @@ task Test -depends Compile {
 
 task Collect -depends Compile {
     $webProjects = gci $srcDir | Where-Object {$_.Name.EndsWith(".Web")}
+    if (!$webProjects) { return }
     "Collecting the following web projects: $webProjects"
     foreach ($webProject in $webProjects)
     {
@@ -86,6 +93,7 @@ task Collect -depends Compile {
 
 task GenerateNuspec -depends Collect {
     $dirs = gci $collectDir
+    if (!$dirs) { return }
     foreach ($dir in $dirs)
     {
         $projectPath = $dir.FullName
@@ -113,7 +121,6 @@ task GenerateNuspec -depends Collect {
 }
 
 task PackCollected -depends GenerateNuspec {
-    "CollectDir = $collectDir"
     $nuspecFiles = gci $collectDir | Where-Object {$_.Name.EndsWith(".nuspec")}
     if (!$nuspecFiles) { return }
     "Packaging for the following nuspecs: $nuspecFiles"
@@ -135,6 +142,7 @@ task Pack -depends PackCollected {
 
 task TestPacks -depends Pack {
     $nuspecs = gci $collectDir | Where-Object {$_.Name.EndsWith(".nuspec")}
+    if (!$nuspecs) { return }
     foreach ($nuspec in $nuspecs)
     {
         $packageName = $nuspec.Name.Replace(".nuspec", "")
@@ -142,8 +150,9 @@ task TestPacks -depends Pack {
     }
 }
 
-task Publish -depends Pack {
+task Publish -depends Pack, Test {
     $nupackages = gci $outputDir -include *.nupkg
+    if (!$nupackages) { return }
     "Publishing the following NuGet packages: $nupackages"
     foreach ($nupackage in $nupackages)
     {
@@ -157,31 +166,22 @@ function GetWebProjects
 }
 
 task UnmountWebsites {
-    if (!(Test-Path $collectDir))
-    {
-        return
-    }
-
+    if (!(Test-Path $collectDir)) { return }
     $webProjects = GetWebProjects
-    if (!$webProjects)
-    {
-        return
-    }
-
+    if (!$webProjects) { return }
     foreach ($webProject in $webProjects)
     {
         $webProjectName = $webProject.Name
         $existing = (& $appcmd list site $webProjectName)
-        if ($existing)
-        {
-            "Unmounts existing site $webProjectName."
-            exec { & $appcmd delete site $webProjectName }
-        }
+        if (!$existing) { continue }
+        "Unmounts existing site $webProjectName."
+        exec { & $appcmd delete site $webProjectName }
     }
 }
 
 task Install -depends Collect, UnmountWebsites {
     $webProjects = GetWebProjects
+    if (!$webProjects) { return }
     $websitePort = $defaultWebsitePort
     foreach ($webProject in $webProjects)
     {
