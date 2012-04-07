@@ -3,8 +3,8 @@ $framework = '4.0'
 . .\psake_ext.ps1
 
 properties {
-    $versionMajor = 1
-    $versionMinor = 0
+    $versionMajor = 0
+    $versionMinor = 1
     $versionBuild = 0
     $baseDir = Resolve-Path ".\.."
     $solutionFileItem = (Get-Item $baseDir\*.sln)
