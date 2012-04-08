@@ -1,3 +1,11 @@
 $task = $args[0]
 
-& ".\scripts\psen.ps1" $task
+$psenVersion = "0.1.0.29"
+
+$psenPath = ".\packages\psen.$psenVersion\tools\psen.ps1"
+if (!(Test-Path $psenPath))
+{
+    .nuget\nuget.exe install psen -o packages -version $psenVersion
+}
+
+& $psenPath $task
