@@ -8,3 +8,4 @@ bin/
 *~
 /src/VersionInfo.cs
 output/
+/scripts/private.ps1
