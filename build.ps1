@@ -1,6 +1,6 @@
 $task = $args[0]
 
-$psenVersion = "0.1.0.41"
+$psenVersion = "0.1.0.42"
 
 $psenPath = ".\packages\psen.$psenVersion\tools\psen.ps1"
 if (!(Test-Path $psenPath))
