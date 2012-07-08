@@ -6,7 +6,7 @@ using Dapper;
 using Uncas.Core;
 using Uncas.NowSite.Web.Utilities;
 
-namespace Uncas.NowSite.Web.Models.ReadStores
+namespace Uncas.NowSite.Web.Models.Infrastructure
 {
     public abstract class ReadStore<T> :
         IReadStore<T>

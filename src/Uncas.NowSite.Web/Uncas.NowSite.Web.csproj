@@ -120,11 +120,11 @@
     <Compile Include="Models\ReadStores\BlogPostDenormalizer.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadStore.cs" />
-    <Compile Include="Models\ReadStores\IReadStore.cs" />
-    <Compile Include="Models\ReadStores\ReadModel.cs" />
-    <Compile Include="Models\ReadStores\ReadStore.cs" />
+    <Compile Include="Models\Infrastructure\IReadStore.cs" />
+    <Compile Include="Models\Infrastructure\ReadModel.cs" />
+    <Compile Include="Models\Infrastructure\ReadStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
-    <Compile Include="Models\ReadStores\ReadDataModel.cs" />
+    <Compile Include="Models\Infrastructure\ReadDataModel.cs" />
     <Compile Include="NowSiteRuntime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\IStringSerializer.cs" />

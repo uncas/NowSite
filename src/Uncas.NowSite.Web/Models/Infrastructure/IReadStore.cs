@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Uncas.NowSite.Web.Models.ReadStores
+namespace Uncas.NowSite.Web.Models.Infrastructure
 {
     public interface IReadStore<T>
     {
