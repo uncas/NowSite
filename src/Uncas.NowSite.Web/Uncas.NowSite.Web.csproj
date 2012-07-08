@@ -65,11 +65,15 @@
     <Reference Include="Uncas.Core">
       <HintPath>..\..\packages\Uncas.Core.1.1.0.154\lib\net40\Uncas.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mvc3">
+      <HintPath>..\..\packages\Unity.Mvc3.1.2\lib\net40\Unity.Mvc3.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\output\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BlogPostController.cs" />
     <Compile Include="Models\CreateBlogPostInputModel.cs" />
@@ -86,6 +90,7 @@
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

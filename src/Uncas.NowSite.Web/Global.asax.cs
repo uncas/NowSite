@@ -25,6 +25,7 @@ namespace Uncas.NowSite.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            Bootstrapper.Initialise();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
