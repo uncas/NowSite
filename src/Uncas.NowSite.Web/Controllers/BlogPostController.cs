@@ -6,6 +6,7 @@ using Uncas.NowSite.Web.Models.InputModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {
+    [Authorize]
     public class BlogPostController : Controller
     {
         private readonly ICommandBus _commandBus;

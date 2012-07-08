@@ -19,6 +19,11 @@ namespace Uncas.NowSite.Web.Controllers
                 model.Password == "test123")
             {
                 FormsAuthentication.SetAuthCookie(model.UserName, true);
+                if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                {
+                    return Redirect(model.ReturnUrl);
+                }
+
                 return RedirectToAction("Index", "Home");
             }
 
