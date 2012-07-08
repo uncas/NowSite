@@ -5,6 +5,8 @@ namespace Uncas.NowSite.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private Bootstrapper _bootstrapper;
+
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
@@ -19,16 +21,22 @@ namespace Uncas.NowSite.Web
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
-
         }
 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            Bootstrapper.Initialise();
+            _bootstrapper = new Bootstrapper();
+            _bootstrapper.Start();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Application_End()
+        {
+            if (_bootstrapper != null)
+                _bootstrapper.Stop();
         }
     }
 }
