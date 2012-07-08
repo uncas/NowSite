@@ -1,4 +1,5 @@
 ﻿using SimpleCqrs.Eventing;
+using Uncas.Core;
 using Uncas.NowSite.Web.Models.Events;
 
 namespace Uncas.NowSite.Web.Models.ReadStores
@@ -19,7 +20,8 @@ namespace Uncas.NowSite.Web.Models.ReadStores
             {
                 Id = domainEvent.AggregateRootId,
                 Title = domainEvent.Title,
-                Content = domainEvent.Content
+                Content = domainEvent.Content,
+                Created = SystemTime.Now()
             });
         }
     }

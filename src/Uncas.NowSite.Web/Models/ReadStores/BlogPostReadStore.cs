@@ -30,7 +30,7 @@ namespace Uncas.NowSite.Web.Models.ReadStores
                     const string createSql =
                         @"
 CREATE TABLE BlogPost
-(Id TEXT PRIMARY KEY, Title TEXT, Content TEXT, Created DateTime);";
+(Id UNIQUEIDENTIFIER PRIMARY KEY, Title TEXT, Content TEXT, Created DATETIME);";
                     connection.Execute(createSql);
                 }
             }
@@ -61,7 +61,7 @@ CREATE TABLE BlogPost
 
     public class BlogPostReadData
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Created { get; set; }
@@ -71,23 +71,21 @@ CREATE TABLE BlogPost
         {
             return new BlogPostReadData
                     {
-                        Id = model.Id.ToString(),
+                        Id = model.Id,
                         Title = model.Title,
                         Content = model.Content,
-                        Created = DateTime.Now
+                        Created = model.Created
                     };
         }
 
         public BlogPostReadModel AsReadModel()
         {
-            Guid id;
-            if (!Guid.TryParse(Id, out id))
-                return null;
             return new BlogPostReadModel
             {
-                Id = id,
+                Id = Id,
                 Title = Title,
-                Content = Content
+                Content = Content,
+                Created = Created
             };
         }
     }
