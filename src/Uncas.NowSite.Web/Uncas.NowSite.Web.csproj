@@ -91,6 +91,10 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Models\Events\EditBlogPostStartedEvent.cs" />
+    <Compile Include="Models\CommandHandlers\StartEditBlogPostCommandHandler.cs" />
+    <Compile Include="Models\Commands\StartEditBlogPostCommand.cs" />
+    <Compile Include="Models\InputModels\EditBlogPostInputModel.cs" />
     <Compile Include="Models\Events\BlogPostInfoAddedEvent.cs" />
     <Compile Include="Models\CommandHandlers\AddBlogPostInfoCommandHandler.cs" />
     <Compile Include="Models\Commands\AddBlogPostInfoCommand.cs" />
@@ -147,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\BlogPost\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BlogPost\Edit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

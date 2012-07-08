@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.InputModels;
+using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers
 {
@@ -11,9 +12,13 @@ namespace Uncas.NowSite.Web.Controllers
     {
         private readonly ICommandBus _commandBus;
 
-        public BlogPostController(ICommandBus commandBus)
+        private readonly IBlogPostReadStore _blogPostReadStore;
+
+        public BlogPostController(ICommandBus commandBus,
+            IBlogPostReadStore blogPostReadStore)
         {
             _commandBus = commandBus;
+            _blogPostReadStore = blogPostReadStore;
         }
 
         [HttpGet]
@@ -29,16 +34,41 @@ namespace Uncas.NowSite.Web.Controllers
         public ActionResult Create(CreateBlogPostInputModel model)
         {
             Guid id = model.Id;
-
             var addInfoCommand = new AddBlogPostInfoCommand(
                 id,
                 model.Title,
                 model.Content);
             _commandBus.Send(addInfoCommand);
-
             var publishCommand = new PublishBlogPostCommand(id);
             _commandBus.Send(publishCommand);
+            return RedirectToAction("Index", "Home");
+        }
 
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            var createCommand = new StartEditBlogPostCommand(id);
+            _commandBus.Send(createCommand);
+            BlogPostReadModel blogPost = _blogPostReadStore.GetById(id);
+            return View(new EditBlogPostInputModel
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                Content = blogPost.Content
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditBlogPostInputModel model)
+        {
+            Guid id = model.Id;
+            var addInfoCommand = new AddBlogPostInfoCommand(
+               id,
+               model.Title,
+               model.Content);
+            _commandBus.Send(addInfoCommand);
+            var publishCommand = new PublishBlogPostCommand(id);
+            _commandBus.Send(publishCommand);
             return RedirectToAction("Index", "Home");
         }
     }

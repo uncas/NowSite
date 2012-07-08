@@ -38,6 +38,11 @@ namespace Uncas.NowSite.Web.Models.Aggregates
             });
         }
 
+        internal void StartEdit()
+        {
+            Apply(new EditBlogPostStartedEvent { AggregateRootId = Id });
+        }
+
         public void OnBlogPostCreated(BlogPostCreatedEvent blogPostCreated)
         {
             Id = blogPostCreated.AggregateRootId;
@@ -47,10 +52,6 @@ namespace Uncas.NowSite.Web.Models.Aggregates
         {
             Title = blogPostInfoAdded.Title;
             Content = blogPostInfoAdded.Content;
-        }
-
-        public void OnBlogPostPublished(BlogPostPublishedEvent blogPostPublished)
-        {
         }
     }
 }

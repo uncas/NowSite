@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
@@ -6,5 +7,6 @@ namespace Uncas.NowSite.Web.Models.ReadStores
     {
         void AddBlogPost(BlogPostReadModel blogPost);
         IEnumerable<BlogPostReadModel> GetBlogPosts();
+        BlogPostReadModel GetById(Guid id);
     }
 }
