@@ -8,7 +8,9 @@ using Uncas.NowSite.Web.Utilities;
 
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
-    public abstract class ReadStore<T> where T : ReadModel
+    public abstract class ReadStore<T> :
+        IReadStore<T>
+        where T : ReadModel
     {
         private readonly string _connectionString;
         private readonly IStringSerializer _stringSerializer;

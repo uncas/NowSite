@@ -3,10 +3,15 @@ using System.Collections.Generic;
 
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
-    public interface IBlogPostReadStore
+    public interface IReadStore<T>
     {
-        void Add(BlogPostReadModel blogPost);
-        IEnumerable<BlogPostReadModel> GetAll();
-        BlogPostReadModel GetById(Guid id);
+        void Add(T blogPost);
+        IEnumerable<T> GetAll();
+        T GetById(Guid id);
+    }
+
+    public interface IBlogPostReadStore :
+        IReadStore<BlogPostReadModel>
+    {
     }
 }
