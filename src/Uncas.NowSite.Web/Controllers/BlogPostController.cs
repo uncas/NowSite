@@ -27,6 +27,17 @@ namespace Uncas.NowSite.Web.Controllers
         [HttpPost]
         public ActionResult Create(CreateBlogPostInputModel model)
         {
+            Guid id = model.Id;
+
+            var addInfoCommand = new AddBlogPostInfoCommand(
+                id,
+                model.Title,
+                model.Content);
+            _commandBus.Send(addInfoCommand);
+
+            var publishCommand = new PublishBlogPostCommand(id);
+            _commandBus.Send(publishCommand);
+            
             return View();
         }
     }

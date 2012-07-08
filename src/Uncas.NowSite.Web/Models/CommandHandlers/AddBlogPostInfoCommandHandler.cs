@@ -4,18 +4,19 @@ using Uncas.NowSite.Web.Models.Commands;
 
 namespace Uncas.NowSite.Web.Models.CommandHandlers
 {
-    public class CreateBlogPostCommandHandler :
-        BlogPostCommandHandler<CreateBlogPostCommand>
+    public class AddBlogPostInfoCommandHandler :
+        BlogPostCommandHandler<AddBlogPostInfoCommand>
     {
-        public CreateBlogPostCommandHandler(
+        public AddBlogPostInfoCommandHandler(
             IDomainRepository domainRepository) :
             base(domainRepository)
         {
         }
 
-        public override void Handle(CreateBlogPostCommand command)
+        public override void Handle(AddBlogPostInfoCommand command)
         {
-            var blogPost = new BlogPost(command.Id);
+            var blogPost = _domainRepository.GetById<BlogPost>(command.Id);
+            blogPost.AddInfo(command.Title, command.Content);
             _domainRepository.Save(blogPost);
         }
     }

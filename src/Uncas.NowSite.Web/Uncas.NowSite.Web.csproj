@@ -74,8 +74,15 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Events\BlogPostInfoAddedEvent.cs" />
+    <Compile Include="Models\CommandHandlers\AddBlogPostInfoCommandHandler.cs" />
+    <Compile Include="Models\Commands\AddBlogPostInfoCommand.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BlogPostController.cs" />
+    <Compile Include="Models\Events\BlogPostPublishedEvent.cs" />
+    <Compile Include="Models\CommandHandlers\BlogPostCommandHandler.cs" />
+    <Compile Include="Models\CommandHandlers\PublishBlogPostCommandHandler.cs" />
+    <Compile Include="Models\Commands\PublishBlogPostCommand.cs" />
     <Compile Include="Models\Aggregates\BlogPost.cs" />
     <Compile Include="Models\Events\BlogPostCreatedEvent.cs" />
     <Compile Include="Models\CommandHandlers\CreateBlogPostCommandHandler.cs" />
