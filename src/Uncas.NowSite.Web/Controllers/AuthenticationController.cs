@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using Uncas.NowSite.Web.Models;
+using Uncas.NowSite.Web.Models.InputModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {

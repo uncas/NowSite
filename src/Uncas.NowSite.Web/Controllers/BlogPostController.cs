@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
 using SimpleCqrs.Commanding;
-using Uncas.NowSite.Web.Models;
+using Uncas.NowSite.Web.Models.Commands;
+using Uncas.NowSite.Web.Models.InputModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {
@@ -18,6 +19,8 @@ namespace Uncas.NowSite.Web.Controllers
         public ActionResult Create()
         {
             Guid id = Guid.NewGuid();
+            var createCommand = new CreateBlogPostCommand(id);
+            _commandBus.Send(createCommand);
             return View(new CreateBlogPostInputModel { Id = id });
         }
 

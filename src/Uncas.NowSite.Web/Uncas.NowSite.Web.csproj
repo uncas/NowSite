@@ -76,12 +76,16 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BlogPostController.cs" />
-    <Compile Include="Models\CreateBlogPostInputModel.cs" />
+    <Compile Include="Models\Aggregates\BlogPost.cs" />
+    <Compile Include="Models\Events\BlogPostCreatedEvent.cs" />
+    <Compile Include="Models\CommandHandlers\CreateBlogPostCommandHandler.cs" />
+    <Compile Include="Models\Commands\CreateBlogPostCommand.cs" />
+    <Compile Include="Models\InputModels\CreateBlogPostInputModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\LogOnInputModel.cs" />
+    <Compile Include="Models\InputModels\LogOnInputModel.cs" />
     <Compile Include="NowSiteRuntime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

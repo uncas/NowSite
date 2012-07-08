@@ -1,4 +1,4 @@
-﻿namespace Uncas.NowSite.Web.Models
+﻿namespace Uncas.NowSite.Web.Models.InputModels
 {
     public class LogOnInputModel
     {
