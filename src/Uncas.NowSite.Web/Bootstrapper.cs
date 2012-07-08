@@ -42,7 +42,7 @@ namespace Uncas.NowSite.Web
         {
             var container = new UnityContainer();
             container.RegisterFactory<IEventStore>(
-                c => new FileEventStore(GetDataDirectory("EventStore"),
+                c => new NowFileEventStore(GetDataDirectory("EventStore"),
                     c.Resolve<ITypeCatalog>()));
             container.RegisterType<IStringSerializer, JsonStringSerializer>();
             container.RegisterFactory<IBlogPostReadStore>(
