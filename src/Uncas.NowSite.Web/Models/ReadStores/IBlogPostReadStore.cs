@@ -5,8 +5,8 @@ namespace Uncas.NowSite.Web.Models.ReadStores
 {
     public interface IBlogPostReadStore
     {
-        void AddBlogPost(BlogPostReadModel blogPost);
-        IEnumerable<BlogPostReadModel> GetBlogPosts();
+        void Add(BlogPostReadModel blogPost);
+        IEnumerable<BlogPostReadModel> GetAll();
         BlogPostReadModel GetById(Guid id);
     }
 }

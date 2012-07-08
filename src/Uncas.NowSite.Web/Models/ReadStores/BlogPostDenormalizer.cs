@@ -16,7 +16,7 @@ namespace Uncas.NowSite.Web.Models.ReadStores
 
         public void Handle(BlogPostPublishedEvent domainEvent)
         {
-            _readStore.AddBlogPost(new BlogPostReadModel
+            _readStore.Add(new BlogPostReadModel
             {
                 Id = domainEvent.AggregateRootId,
                 Title = domainEvent.Title,

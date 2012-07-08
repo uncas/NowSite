@@ -16,7 +16,7 @@ namespace Uncas.NowSite.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<BlogPostReadModel> blogPosts =
-                _blogPostReadStore.GetBlogPosts();
+                _blogPostReadStore.GetAll();
             return View(blogPosts);
         }
     }
