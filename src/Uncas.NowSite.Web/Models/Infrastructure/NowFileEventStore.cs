@@ -21,7 +21,9 @@ namespace Uncas.NowSite.Web
             Guid aggregateRootId,
             int startSequence)
         {
-            throw new System.NotImplementedException();
+            return _fileEventStore.GetEvents(
+                aggregateRootId,
+                startSequence);
         }
 
         public IEnumerable<DomainEvent> GetEventsByEventTypes(
@@ -47,7 +49,7 @@ namespace Uncas.NowSite.Web
 
         public void Insert(IEnumerable<DomainEvent> domainEvents)
         {
-            throw new System.NotImplementedException();
+            _fileEventStore.Insert(domainEvents);
         }
     }
 }
