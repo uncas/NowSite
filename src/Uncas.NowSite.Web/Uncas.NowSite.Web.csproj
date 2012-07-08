@@ -92,6 +92,9 @@
     <Compile Include="..\..\output\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\Events\BlogPostDeletedEvent.cs" />
+    <Compile Include="Models\CommandHandlers\DeleteBlogPostCommandHandler.cs" />
+    <Compile Include="Models\Commands\DeleteBlogPostCommand.cs" />
     <Compile Include="Models\ReadStores\BlogPostMasterStore.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />

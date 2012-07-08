@@ -43,6 +43,11 @@ namespace Uncas.NowSite.Web.Models.Aggregates
             Apply(new EditBlogPostStartedEvent { AggregateRootId = Id });
         }
 
+        internal void Delete()
+        {
+            Apply(new BlogPostDeletedEvent { AggregateRootId = Id });
+        }
+
         public void OnBlogPostCreated(BlogPostCreatedEvent blogPostCreated)
         {
             Id = blogPostCreated.AggregateRootId;

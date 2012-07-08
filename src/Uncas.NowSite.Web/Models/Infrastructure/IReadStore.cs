@@ -8,5 +8,6 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
         void Add(T blogPost);
         IEnumerable<T> GetAll();
         T GetById(Guid id);
+        void Delete(Guid id);
     }
 }

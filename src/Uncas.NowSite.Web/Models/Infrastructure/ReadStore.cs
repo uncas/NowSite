@@ -76,6 +76,17 @@ WHERE Id = @Id;
             }
         }
 
+        public void Delete(Guid id)
+        {
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                connection.Execute(
+                    string.Format("DELETE FROM {0} WHERE Id = @Id", _modelName),
+                    new { Id = id });
+            }
+        }
+
         private void Initialize()
         {
             using (var connection = new SQLiteConnection(_connectionString))

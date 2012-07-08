@@ -71,5 +71,13 @@ namespace Uncas.NowSite.Web.Controllers
             _commandBus.Send(publishCommand);
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public ActionResult Delete(Guid id)
+        {
+            var deleteCommand = new DeleteBlogPostCommand(id);
+            _commandBus.Send(deleteCommand);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

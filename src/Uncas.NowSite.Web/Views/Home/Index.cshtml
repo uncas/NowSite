@@ -4,36 +4,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
-    Index</h2>
-<table>
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Content
-        </th>
-        <th>
-        </th>
-    </tr>
+    Blog posts</h2>
+<ul>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+        <li>
+            <h3>
                 @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
+            </h3>
+            <div>
                 @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @if (User.Identity.IsAuthenticated)
-                {
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div>
                     @Html.ActionLink(
-                        "Edit", 
-                        "Edit", 
+                        "Edit",
+                        "Edit",
                         new { Controller = "BlogPost", id = item.Id })
-                }
-            </td>
-        </tr>
+                    @using (Html.BeginForm(
+                        "Delete", 
+                        "BlogPost", 
+                        new { id = item.Id }))
+                    {
+                        <input type="submit" value="Delete" />
+                    }
+                </div>
+            }
+        </li>
     }
-</table>
+</ul>
