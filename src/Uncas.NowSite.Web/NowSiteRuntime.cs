@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using SimpleCqrs;
+using SimpleCqrs.Eventing;
 
 namespace Uncas.NowSite.Web
 {
@@ -17,6 +18,12 @@ namespace Uncas.NowSite.Web
             GetServiceLocator()
         {
             return new SimpleCqrs.Unity.UnityServiceLocator(_container);
+        }
+
+        protected override IEventStore GetEventStore(
+            IServiceLocator serviceLocator)
+        {
+            return serviceLocator.Resolve<IEventStore>();
         }
     }
 }

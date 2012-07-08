@@ -48,6 +48,9 @@
     <Reference Include="SimpleCqrs">
       <HintPath>..\..\packages\SimpleCqrs.1.0\lib\SimpleCqrs.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleCqrs.EventStore.File">
+      <HintPath>..\..\packages\SimpleCqrs.EventStore.File.1.0\lib\SimpleCqrs.EventStore.File.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleCqrs.Unity">
       <HintPath>..\..\packages\SimpleCqrs.Unity.1.0\lib\SimpleCqrs.Unity.dll</HintPath>
     </Reference>
