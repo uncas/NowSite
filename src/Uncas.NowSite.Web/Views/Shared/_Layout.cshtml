@@ -24,6 +24,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <li>@Html.ActionLink("Create blog post", "Create", "BlogPost")</li>
+                <li>@Html.ActionLink("Blog posts", "Index", "BlogPost")</li>
             }
         </ul>
     </div>

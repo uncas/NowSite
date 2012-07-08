@@ -4,6 +4,7 @@ using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.InputModels;
 using Uncas.NowSite.Web.Models.ReadStores;
+using System.Collections.Generic;
 
 namespace Uncas.NowSite.Web.Controllers
 {
@@ -13,12 +14,24 @@ namespace Uncas.NowSite.Web.Controllers
         private readonly ICommandBus _commandBus;
 
         private readonly IBlogPostReadStore _blogPostReadStore;
+        private readonly IBlogPostMasterStore _masterStore;
 
-        public BlogPostController(ICommandBus commandBus,
-            IBlogPostReadStore blogPostReadStore)
+        public BlogPostController(
+            ICommandBus commandBus,
+            IBlogPostReadStore blogPostReadStore,
+            IBlogPostMasterStore masterStore)
         {
             _commandBus = commandBus;
             _blogPostReadStore = blogPostReadStore;
+            _masterStore = masterStore;
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            IEnumerable<BlogPostMasterModel> blogPosts =
+                _masterStore.GetAll();
+            return View(blogPosts);
         }
 
         [HttpGet]

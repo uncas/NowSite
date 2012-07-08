@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Uncas.NowSite.Web.Models.ReadStores.BlogPostMasterModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Id
+        </td>
+    </tr>
+}
+
+</table>
