@@ -1,47 +1,23 @@
-﻿using System.Web.Mvc;
-using System.Reflection;
-using System;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers
 {
-    public class BaseController : Controller
-    {
-        public BaseController()
-        {
-            var assembly = GetType().Assembly;
-            ViewBag.Revised = string.Format(
-                "{0}, {1:G}",
-                GetVersion(assembly),
-                GetDate(assembly));
-        }
-
-        private static DateTime GetDate(Assembly assembly)
-        {
-            var fileInfo = new FileInfo(assembly.Location);
-            return fileInfo.LastWriteTime;
-        }
-
-        private static string GetVersion(Assembly assembly)
-        {
-            var attributes = assembly.GetCustomAttributes(false);
-            foreach (var attrib in attributes)
-            {
-                if (attrib is AssemblyInformationalVersionAttribute)
-                {
-                    return ((AssemblyInformationalVersionAttribute)attrib).InformationalVersion;
-                }
-            }
-
-            return string.Empty;
-        }
-    }
-
     public class HomeController : BaseController
     {
+        private readonly IBlogPostReadStore _blogPostReadStore;
+
+        public HomeController(IBlogPostReadStore blogPostReadStore)
+        {
+            _blogPostReadStore = blogPostReadStore;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<BlogPostReadModel> blogPosts =
+                _blogPostReadStore.GetBlogPosts();
+            return View(blogPosts);
         }
     }
 }

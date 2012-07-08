@@ -21,8 +21,11 @@
             {            
                 <li>@Html.ActionLink("Log on", "LogOn", "Authentication")</li>
             }
-            </ul>
-                
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Create blog post", "Create", "BlogPost")</li>
+            }
+        </ul>
     </div>
     <div id="content">
         @RenderBody()

@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 using SimpleCqrs;
 using SimpleCqrs.Eventing;
 using SimpleCqrs.EventStore.File;
+using Uncas.NowSite.Web.Models.ReadStores;
 using Unity.Mvc3;
 
 namespace Uncas.NowSite.Web
@@ -35,16 +36,25 @@ namespace Uncas.NowSite.Web
         {
             var container = new UnityContainer();
             container.RegisterFactory<IEventStore>(
-                c => new FileEventStore(GetFileEventStoreBaseDirectory(),
+                c => new FileEventStore(GetDataDirectory("EventStore"),
                     c.Resolve<ITypeCatalog>()));
+            container.RegisterType<IBlogPostReadStore, BlogPostReadStore>();
             return container;
         }
 
-        private static string GetFileEventStoreBaseDirectory()
+        private static string GetDataDirectory(string dataType)
+        {
+            return string.Format(
+                @"{0}\{1}",
+                GetBaseDataDirectory(),
+                dataType);
+        }
+
+        private static string GetBaseDataDirectory()
         {
             string path = HttpContext.Current.Server.MapPath("/");
             return string.Format(
-                @"{0}\..\data\NowSiteEventStore",
+                @"{0}\..\data\NowSite",
                 path);
         }
     }

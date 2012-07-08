@@ -4,7 +4,7 @@ using Uncas.NowSite.Web.Models.InputModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {
-    public class AuthenticationController : Controller
+    public class AuthenticationController : BaseController
     {
         [HttpGet]
         public ActionResult LogOn()

@@ -77,6 +77,7 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Models\Events\BlogPostInfoAddedEvent.cs" />
     <Compile Include="Models\CommandHandlers\AddBlogPostInfoCommandHandler.cs" />
     <Compile Include="Models\Commands\AddBlogPostInfoCommand.cs" />
@@ -96,6 +97,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\InputModels\LogOnInputModel.cs" />
+    <Compile Include="Models\ReadStores\BlogPostDenormalizer.cs" />
+    <Compile Include="Models\ReadStores\BlogPostReadModel.cs" />
+    <Compile Include="Models\ReadStores\BlogPostReadStore.cs" />
+    <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
     <Compile Include="NowSiteRuntime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,12 +127,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Authentication\LogOn.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\BlogPost\Create.cshtml" />
   </ItemGroup>

@@ -1,5 +1,28 @@
-﻿@{
-    ViewBag.Title = "Nu";
+﻿@model IEnumerable<Uncas.NowSite.Web.Models.ReadStores.BlogPostReadModel>
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<h2>
+    Index</h2>
+<table>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Content
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+        </tr>
+    }
+</table>

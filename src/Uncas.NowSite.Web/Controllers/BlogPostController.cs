@@ -7,7 +7,7 @@ using Uncas.NowSite.Web.Models.InputModels;
 namespace Uncas.NowSite.Web.Controllers
 {
     [Authorize]
-    public class BlogPostController : Controller
+    public class BlogPostController : BaseController
     {
         private readonly ICommandBus _commandBus;
 
@@ -38,8 +38,8 @@ namespace Uncas.NowSite.Web.Controllers
 
             var publishCommand = new PublishBlogPostCommand(id);
             _commandBus.Send(publishCommand);
-            
-            return View();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
