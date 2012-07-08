@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using Dapper;
@@ -43,7 +42,7 @@ CREATE TABLE BlogPost
                 connection.Open();
                 connection.Execute(
                     "INSERT INTO BlogPost (Id, Title, Content, Created) VALUES (@Id, @Title, @Content, @Created)",
-                    BlogPostReadData.FromReadModel(blogPost));
+                    blogPost);
             }
         }
 
@@ -52,41 +51,9 @@ CREATE TABLE BlogPost
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Query<BlogPostReadData>(
-                    "SELECT Id, Title, Content FROM BlogPost ORDER BY Created DESC").
-                    Select(x => x.AsReadModel());
+                return connection.Query<BlogPostReadModel>(
+                    "SELECT Id, Title, Content FROM BlogPost ORDER BY Created DESC");
             }
-        }
-    }
-
-    public class BlogPostReadData
-    {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public DateTime Created { get; set; }
-
-        public static BlogPostReadData FromReadModel(
-            BlogPostReadModel model)
-        {
-            return new BlogPostReadData
-                    {
-                        Id = model.Id,
-                        Title = model.Title,
-                        Content = model.Content,
-                        Created = model.Created
-                    };
-        }
-
-        public BlogPostReadModel AsReadModel()
-        {
-            return new BlogPostReadModel
-            {
-                Id = Id,
-                Title = Title,
-                Content = Content,
-                Created = Created
-            };
         }
     }
 }
