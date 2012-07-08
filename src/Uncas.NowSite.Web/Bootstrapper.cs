@@ -44,6 +44,10 @@ namespace Uncas.NowSite.Web
                 c => new BlogPostReadStore(
                     GetDataDirectory("ReadStore.db"),
                     c.Resolve<IStringSerializer>()));
+            container.RegisterFactory<IBlogPostMasterStore>(
+                c => new BlogPostMasterStore(
+                    GetDataDirectory("ReadStore.db"),
+                    c.Resolve<IStringSerializer>()));
             return container;
         }
 

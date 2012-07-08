@@ -92,6 +92,7 @@
     <Compile Include="..\..\output\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\ReadStores\BlogPostMasterStore.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Models\Events\EditBlogPostStartedEvent.cs" />
@@ -118,11 +119,13 @@
     </Compile>
     <Compile Include="Models\InputModels\LogOnInputModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostDenormalizer.cs" />
+    <Compile Include="Models\ReadStores\BlogPostMasterModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadStore.cs" />
     <Compile Include="Models\Infrastructure\IReadStore.cs" />
     <Compile Include="Models\Infrastructure\ReadModel.cs" />
     <Compile Include="Models\Infrastructure\ReadStore.cs" />
+    <Compile Include="Models\ReadStores\IBlogPostMasterStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
     <Compile Include="Models\Infrastructure\ReadDataModel.cs" />
     <Compile Include="NowSiteRuntime.cs" />
