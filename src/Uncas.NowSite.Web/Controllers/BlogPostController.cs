@@ -14,24 +14,24 @@ namespace Uncas.NowSite.Web.Controllers
         private readonly ICommandBus _commandBus;
 
         private readonly IBlogPostReadStore _blogPostReadStore;
-        private readonly IBlogPostMasterStore _masterStore;
+        private readonly IDeletedBlogPostStore _deletedStore;
 
         public BlogPostController(
             ICommandBus commandBus,
             IBlogPostReadStore blogPostReadStore,
-            IBlogPostMasterStore masterStore)
+            IDeletedBlogPostStore deletedStore)
         {
             _commandBus = commandBus;
             _blogPostReadStore = blogPostReadStore;
-            _masterStore = masterStore;
+            _deletedStore = deletedStore;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<BlogPostMasterModel> blogPosts =
-                _masterStore.GetAll();
-            return View(blogPosts);
+            IEnumerable<DeletedBlogPostModel> deletedPosts =
+                _deletedStore.GetAll();
+            return View(deletedPosts);
         }
 
         [HttpGet]
@@ -90,6 +90,14 @@ namespace Uncas.NowSite.Web.Controllers
         {
             var deleteCommand = new DeleteBlogPostCommand(id);
             _commandBus.Send(deleteCommand);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Publish(Guid id)
+        {
+            var publishCommand = new PublishBlogPostCommand(id);
+            _commandBus.Send(publishCommand);
             return RedirectToAction("Index", "Home");
         }
     }

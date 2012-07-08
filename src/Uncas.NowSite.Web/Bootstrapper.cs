@@ -3,8 +3,10 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using SimpleCqrs;
+using SimpleCqrs.Commanding;
 using SimpleCqrs.Eventing;
 using SimpleCqrs.EventStore.File;
+using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.ReadStores;
 using Uncas.NowSite.Web.Utilities;
 using Unity.Mvc3;
@@ -14,17 +16,20 @@ namespace Uncas.NowSite.Web
     public class Bootstrapper
     {
         private readonly ISimpleCqrsRuntime _runtime;
+        private readonly IUnityContainer _container;
 
         public Bootstrapper()
         {
-            var container = BuildUnityContainer();
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-            _runtime = new NowSiteRuntime(container);
+            _container = BuildUnityContainer();
+            DependencyResolver.SetResolver(new UnityDependencyResolver(_container));
+            _runtime = new NowSiteRuntime(_container);
         }
 
         internal void Start()
         {
             _runtime.Start();
+            var commandBus = _container.Resolve<ICommandBus>();
+            commandBus.Send(new SyncBlogPostsCommand());
         }
 
         internal void Stop()
@@ -48,6 +53,11 @@ namespace Uncas.NowSite.Web
                 c => new BlogPostMasterStore(
                     GetDataDirectory("ReadStore.db"),
                     c.Resolve<IStringSerializer>()));
+            container.RegisterFactory<IDeletedBlogPostStore>(
+                c => new DeletedBlogPostStore(
+                    GetDataDirectory("ReadStore.db"),
+                    c.Resolve<IStringSerializer>()));
+            
             return container;
         }
 

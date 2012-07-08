@@ -92,9 +92,14 @@
     <Compile Include="..\..\output\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\ReadStores\DeletedBlogPostStore.cs" />
+    <Compile Include="Models\Aggregates\BlogPostState.cs" />
+    <Compile Include="Models\CommandHandlers\SyncBlogPostsCommandHandler.cs" />
+    <Compile Include="Models\Commands\SyncBlogPostsCommand.cs" />
     <Compile Include="Models\Events\BlogPostDeletedEvent.cs" />
     <Compile Include="Models\CommandHandlers\DeleteBlogPostCommandHandler.cs" />
     <Compile Include="Models\Commands\DeleteBlogPostCommand.cs" />
+    <Compile Include="Models\ReadStores\DeletedBlogPostModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostMasterStore.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -128,6 +133,7 @@
     <Compile Include="Models\Infrastructure\IReadStore.cs" />
     <Compile Include="Models\Infrastructure\ReadModel.cs" />
     <Compile Include="Models\Infrastructure\ReadStore.cs" />
+    <Compile Include="Models\ReadStores\IDeletedBlogPostStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostMasterStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
     <Compile Include="Models\Infrastructure\ReadDataModel.cs" />
