@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\..\packages\Dapper.1.8\lib\net40\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Rainbow.SQLite">
+      <HintPath>..\..\packages\Dapper.Rainbow.SQLite.0.1.2\lib\net40\Dapper.Rainbow.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -53,6 +59,13 @@
     </Reference>
     <Reference Include="SimpleCqrs.Unity">
       <HintPath>..\..\packages\SimpleCqrs.Unity.1.0\lib\SimpleCqrs.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\packages\System.Data.SQLite.1.0.81.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\..\packages\System.Data.SQLite.1.0.81.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />

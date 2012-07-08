@@ -38,7 +38,8 @@ namespace Uncas.NowSite.Web
             container.RegisterFactory<IEventStore>(
                 c => new FileEventStore(GetDataDirectory("EventStore"),
                     c.Resolve<ITypeCatalog>()));
-            container.RegisterType<IBlogPostReadStore, BlogPostReadStore>();
+            container.RegisterFactory<IBlogPostReadStore>(
+                c => new BlogPostReadStore(GetDataDirectory("ReadStore.db")));
             return container;
         }
 
