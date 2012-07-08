@@ -120,6 +120,7 @@
     <Compile Include="Models\ReadStores\BlogPostDenormalizer.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadStore.cs" />
+    <Compile Include="Models\ReadStores\IReadStore.cs" />
     <Compile Include="Models\ReadStores\ReadModel.cs" />
     <Compile Include="Models\ReadStores\ReadStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
