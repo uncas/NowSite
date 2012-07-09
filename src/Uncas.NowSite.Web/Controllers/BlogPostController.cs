@@ -124,23 +124,19 @@ namespace Uncas.NowSite.Web.Controllers
             }
 
             Guid pictureId = Guid.NewGuid();
-            string fileName = Path.GetFileName(file.FileName);
-
-            // TODO: Read bytes from stream and use them in command:
-            Stream fileStream = file.InputStream;
-
             _commandBus.Send(new UploadPictureCommand
             {
                 PictureId = pictureId,
-                FileName = fileName,
-                FileStream = fileStream
+                FileName = Path.GetFileName(file.FileName),
+                FileStream = file.InputStream
             });
-            string photoUrl =
-                _pictureReadStore.GetById(pictureId).PictureUrl;
 
             // TODO: Use command:
-            // AddPictureToBlogPost(blogPostId, pictureId)
+            //_commandBus.Send(
+            //    new AddPictureToBlogPostCommand(blogPostId, pictureId);
 
+            string photoUrl =
+                _pictureReadStore.GetById(pictureId).PictureUrl;
             return Redirect(photoUrl);
         }
     }
