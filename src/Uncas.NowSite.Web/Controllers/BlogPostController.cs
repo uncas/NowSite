@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.InputModels;
 using Uncas.NowSite.Web.Models.ReadStores;
-using System.Collections.Generic;
 
 namespace Uncas.NowSite.Web.Controllers
 {
@@ -98,7 +98,14 @@ namespace Uncas.NowSite.Web.Controllers
         {
             var publishCommand = new PublishBlogPostCommand(id);
             _commandBus.Send(publishCommand);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Replay()
+        {
+            _commandBus.Send(new SyncBlogPostsCommand());
+            return RedirectToAction("Index");
         }
     }
 }

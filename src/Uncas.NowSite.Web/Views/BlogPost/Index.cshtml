@@ -1,10 +1,21 @@
 ﻿@model IEnumerable<Uncas.NowSite.Web.Models.ReadStores.DeletedBlogPostModel>
 @{
-    ViewBag.Title = "Deleted blog posts";
+    ViewBag.Title = "Manage blog posts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
-    Deleted blog posts</h2>
+    Manage blog posts</h2>
+<h3>
+    Sync blog posts</h3>
+<div>
+    Sync blog posts by replaying events:
+    @using (Html.BeginForm("Replay", "BlogPost"))
+    {
+        <input type="submit" value="Sync" />
+    }
+</div>
+<h3>
+    Deleted blog posts</h3>
 <table>
     <tr>
         <th>
