@@ -110,6 +110,9 @@
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="Models\CommandHandlers\SyncBlogPostsCommandHandler.cs" />
     <Compile Include="Models\Commands\SyncBlogPostsCommand.cs" />
+    <Compile Include="Models\Infrastructure\CachedReadStore.cs" />
+    <Compile Include="Models\Infrastructure\ICache.cs" />
+    <Compile Include="Models\Infrastructure\WebCache.cs" />
     <Compile Include="Models\ReadStores\DeletedBlogPostStore.cs" />
     <Compile Include="Models\Aggregates\BlogPostState.cs" />
     <Compile Include="Models\Events\BlogPostDeletedEvent.cs" />

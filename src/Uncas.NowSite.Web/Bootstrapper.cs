@@ -8,6 +8,7 @@ using SimpleCqrs.Utilites;
 using Uncas.NowSite.Web.Models.ReadStores;
 using Uncas.NowSite.Web.Utilities;
 using Unity.Mvc3;
+using Uncas.NowSite.Web.Models.Infrastructure;
 
 namespace Uncas.NowSite.Web
 {
@@ -44,10 +45,12 @@ namespace Uncas.NowSite.Web
                 c => new NowFileEventStore(GetDataDirectory("EventStore"),
                     c.Resolve<ITypeCatalog>()));
             container.RegisterType<IStringSerializer, JsonStringSerializer>();
+            container.RegisterType<ICache, WebCache>();
             container.RegisterFactory<IBlogPostReadStore>(
                 c => new BlogPostReadStore(
                     GetDataDirectory("ReadStore.db"),
-                    c.Resolve<IStringSerializer>()));
+                    c.Resolve<IStringSerializer>(),
+                    c.Resolve<ICache>()));
             container.RegisterFactory<IBlogPostMasterStore>(
                 c => new BlogPostMasterStore(
                     GetDataDirectory("ReadStore.db"),

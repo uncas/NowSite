@@ -14,7 +14,8 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
     {
         private readonly string _connectionString;
         private readonly IStringSerializer _stringSerializer;
-        private readonly string _modelName;
+        protected readonly string _modelName;
+        private bool _initialized;
 
         protected ReadStore(
             string path,
@@ -28,7 +29,7 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
             Initialize();
         }
 
-        public void Add(T model)
+        public virtual void Add(T model)
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -54,7 +55,7 @@ WHERE Id = @Id;
             }
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -65,7 +66,7 @@ WHERE Id = @Id;
             }
         }
 
-        public T GetById(Guid id)
+        public virtual T GetById(Guid id)
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -76,7 +77,7 @@ WHERE Id = @Id;
             }
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -89,6 +90,11 @@ WHERE Id = @Id;
 
         private void Initialize()
         {
+            if (_initialized)
+            {
+                return;
+            }
+
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
@@ -108,6 +114,8 @@ CREATE TABLE {0}
 (Id UNIQUEIDENTIFIER PRIMARY KEY, Model TEXT, Created DATETIME, Modified DATETIME);", _modelName);
                 connection.Execute(createSql);
             }
+
+            _initialized = true;
         }
 
         private string Serialize(T readModel)

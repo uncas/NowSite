@@ -4,16 +4,18 @@ using Uncas.NowSite.Web.Utilities;
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
     public class BlogPostReadStore :
-        ReadStore<BlogPostReadModel>,
+        CachedReadStore<BlogPostReadModel>,
         IBlogPostReadStore
     {
         public BlogPostReadStore(
             string path,
-            IStringSerializer stringSerializer)
+            IStringSerializer stringSerializer,
+            ICache cache)
             : base(
             path,
             stringSerializer,
-            "BlogPostReadModel")
+            "BlogPostReadModel",
+            cache)
         {
         }
     }
