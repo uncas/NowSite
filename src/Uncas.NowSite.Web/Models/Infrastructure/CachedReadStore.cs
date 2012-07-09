@@ -36,26 +36,12 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
 
         public override IEnumerable<T> GetAll()
         {
-            var all = (IEnumerable<T>)_cache.Get(GetAllCacheKey());
-            if (all == null)
-            {
-                all = base.GetAll();
-                _cache.Add(GetAllCacheKey(), all);
-            }
-
-            return all;
+            return _cache.Get(GetAllCacheKey(), base.GetAll);
         }
 
         public override T GetById(Guid id)
         {
-            var item = (T)_cache.Get(GetCacheKey(id));
-            if (item == null)
-            {
-                item = base.GetById(id);
-                _cache.Add(GetCacheKey(id), item);
-            }
-
-            return item;
+            return _cache.Get(GetCacheKey(id), () => base.GetById(id));
         }
 
         private string GetCacheKey(Guid id)

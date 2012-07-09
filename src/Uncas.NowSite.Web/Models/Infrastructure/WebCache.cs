@@ -30,5 +30,17 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
         {
             return _container.Get(key);
         }
+
+        public T Get<T>(string key, Func<T> get)
+        {
+            var item = (T)Get(key);
+            if (item == null)
+            {
+                item = get();
+                Add(key, item);
+            }
+
+            return item;
+        }
     }
 }
