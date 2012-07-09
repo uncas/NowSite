@@ -23,7 +23,7 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
         public override void Add(T model)
         {
             base.Add(model);
-            _cache.Add(GetCacheKey(model.Id), model);
+            _cache.Remove(GetCacheKey(model.Id));
             _cache.Remove(GetAllCacheKey());
         }
 
