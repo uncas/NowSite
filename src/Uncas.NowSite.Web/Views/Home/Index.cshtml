@@ -10,7 +10,7 @@
     {
         <li>
             <h3>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.ActionLink(item.Title, "Details", new { id = item.Id })
             </h3>
             <div>
                 @Html.DisplayFor(modelItem => item.Content)

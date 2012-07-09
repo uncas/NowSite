@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Uncas.NowSite.Web.Models.ReadStores;
 
@@ -18,6 +19,13 @@ namespace Uncas.NowSite.Web.Controllers
             IEnumerable<BlogPostReadModel> blogPosts =
                 _blogPostReadStore.GetAll();
             return View(blogPosts);
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            BlogPostReadModel blogPost =
+                _blogPostReadStore.GetById(id);
+            return View(blogPost);
         }
     }
 }
