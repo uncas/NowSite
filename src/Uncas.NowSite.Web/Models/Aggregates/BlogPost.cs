@@ -1,5 +1,6 @@
 ﻿using System;
 using SimpleCqrs.Domain;
+using Uncas.Core;
 using Uncas.NowSite.Web.Models.Events;
 
 namespace Uncas.NowSite.Web.Models.Aggregates
@@ -12,11 +13,16 @@ namespace Uncas.NowSite.Web.Models.Aggregates
 
         public BlogPost(Guid id)
         {
-            Apply(new BlogPostCreatedEvent { AggregateRootId = id });
+            Apply(new BlogPostCreatedEvent
+            {
+                AggregateRootId = id
+            });
         }
 
         public string Title { get; private set; }
         public string Content { get; private set; }
+        public DateTime Created { get; private set; }
+        public DateTime? Published { get; private set; }
         public BlogPostState State { get; private set; }
 
         internal void AddInfo(string title, string content)
@@ -58,6 +64,7 @@ namespace Uncas.NowSite.Web.Models.Aggregates
         {
             Id = blogPostCreated.AggregateRootId;
             State = BlogPostState.Created;
+            Created = blogPostCreated.EventDate;
         }
 
         public void OnBlogPostInfoAdded(BlogPostInfoAddedEvent blogPostInfoAdded)
@@ -69,6 +76,7 @@ namespace Uncas.NowSite.Web.Models.Aggregates
         public void OnBlogPostPublished(BlogPostPublishedEvent blogPostPublished)
         {
             State = BlogPostState.Published;
+            Published = blogPostPublished.EventDate;
         }
 
         public void OnBlogPostDeleted(BlogPostDeletedEvent blogPostDeleted)

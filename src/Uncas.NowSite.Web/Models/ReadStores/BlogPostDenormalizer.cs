@@ -39,7 +39,8 @@ namespace Uncas.NowSite.Web.Models.ReadStores
                 Id = domainEvent.AggregateRootId,
                 Title = domainEvent.Title,
                 Content = domainEvent.Content,
-                Created = SystemTime.Now()
+                //Created = domainEvent.Created,
+                Published = domainEvent.EventDate
             });
         }
 
