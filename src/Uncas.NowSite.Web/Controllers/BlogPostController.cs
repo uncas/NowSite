@@ -113,13 +113,38 @@ namespace Uncas.NowSite.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadPicture(HttpPostedFileBase file)
+        public ActionResult UploadPicture(
+            Guid blogPostId,
+            HttpPostedFileBase file)
         {
             if (file == null || file.ContentLength == 0)
             {
                 return Content("No file");
             }
 
+            Guid pictureId = Guid.NewGuid();
+            string fileName = Path.GetFileName(file.FileName);
+
+            // TODO: Read bytes from stream and use them in command:
+            Stream fileStream = file.InputStream;
+
+            // TODO: Use command:
+            string photoUrl = UploadPicture(
+                blogPostId, 
+                pictureId, 
+                fileName, 
+                fileStream);
+
+            // TODO: Get URL from read query:
+            return Redirect(photoUrl);
+        }
+
+        private string UploadPicture(
+            Guid blogPostId,
+            Guid pictureId,
+            string fileName,
+            Stream fileStream)
+        {
             PicasaService service = new PicasaService("NowSite");
             string userName = "username@gmail.com";
             service.setUserCredentials(
@@ -134,13 +159,11 @@ namespace Uncas.NowSite.Web.Controllers
 
             string albumId = GetAlbumId(service, albumTitle);
 
-            var fileName = Path.GetFileName(file.FileName);
-            string photoUrl = AddPhoto(
+            return AddPhoto(
                 service,
                 albumId,
                 fileName,
-                file.InputStream);
-            return Redirect(photoUrl);
+                fileStream);
         }
 
         private string GetAlbumId(
