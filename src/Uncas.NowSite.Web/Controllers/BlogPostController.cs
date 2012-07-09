@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using Google.GData.Photos;
 using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.InputModels;
@@ -106,6 +110,102 @@ namespace Uncas.NowSite.Web.Controllers
         {
             _commandBus.Send(new SyncBlogPostsCommand());
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UploadPicture(HttpPostedFileBase file)
+        {
+            if (file == null || file.ContentLength == 0)
+            {
+                return Content("No file");
+            }
+
+            PicasaService service = new PicasaService("NowSite");
+            string userName = "username@gmail.com";
+            service.setUserCredentials(
+                userName,
+                "pwd");
+
+            string albumTitle = "NowSite";
+            if (!DoesAlbumExist(service, albumTitle))
+            {
+                CreateAlbum(service, albumTitle);
+            }
+
+            string albumId = GetAlbumId(service, albumTitle);
+
+            var fileName = Path.GetFileName(file.FileName);
+            string photoUrl = AddPhoto(
+                service,
+                albumId,
+                fileName,
+                file.InputStream);
+            return Redirect(photoUrl);
+        }
+
+        private string GetAlbumId(
+            PicasaService service,
+            string albumTitle)
+        {
+            AlbumQuery query = new AlbumQuery(
+                           PicasaQuery.CreatePicasaUri("default"));
+            PicasaFeed feed = service.Query(query);
+            foreach (PicasaEntry entry in feed.Entries)
+            {
+                if (albumTitle.Equals(entry.Title.Text))
+                {
+                    return entry.Id.AbsoluteUri.Split('/').Last();
+                }
+            }
+
+            return null;
+        }
+
+        private bool DoesAlbumExist(
+            PicasaService service,
+            string albumName)
+        {
+            AlbumQuery query = new AlbumQuery(
+                           PicasaQuery.CreatePicasaUri("default"));
+            PicasaFeed feed = service.Query(query);
+            foreach (PicasaEntry entry in feed.Entries)
+            {
+                if (albumName.Equals(entry.Title.Text))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void CreateAlbum(PicasaService service, string albumTitle)
+        {
+            var newEntry = new AlbumEntry();
+            newEntry.Title.Text = albumTitle;
+            newEntry.Summary.Text = "Album used for pictures for NowSite";
+            var ac = new AlbumAccessor(newEntry);
+            //set to "private" for a private album
+            ac.Access = "public";
+            var feedUri = new Uri(PicasaQuery.CreatePicasaUri("default"));
+            var createdEntry = (PicasaEntry)service.Insert(feedUri, newEntry);
+        }
+
+        private string AddPhoto(
+            PicasaService service,
+            string albumId,
+            string fileName,
+            Stream fileStream)
+        {
+            var postUri = new Uri(
+                PicasaQuery.CreatePicasaUri("default", albumId));
+            var entry = (PicasaEntry)service.Insert(
+                postUri,
+                fileStream,
+                "image/jpeg",
+                fileName);
+            fileStream.Close();
+            return entry.Media.Content.Url;
         }
     }
 }
