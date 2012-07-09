@@ -42,14 +42,17 @@ namespace Uncas.NowSite.Web
             DateTime startDate,
             DateTime endDate)
         {
-            return GetEventsByEventTypes(domainEventTypes);
+            return GetEventsByEventTypes(domainEventTypes).
+                Where(x => startDate <= x.EventDate &&
+                    x.EventDate <= endDate);
         }
 
         public IEnumerable<DomainEvent> GetEventsByEventTypes(
             IEnumerable<Type> domainEventTypes,
             Guid aggregateRootId)
         {
-            throw new System.NotImplementedException();
+            return GetEventsByEventTypes(domainEventTypes).
+                Where(x => x.AggregateRootId == aggregateRootId);
         }
 
         public IEnumerable<DomainEvent> GetEventsByEventTypes(
