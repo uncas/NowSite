@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Google.GData.Photos;
 using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.InputModels;
@@ -19,15 +17,18 @@ namespace Uncas.NowSite.Web.Controllers
 
         private readonly IBlogPostReadStore _blogPostReadStore;
         private readonly IDeletedBlogPostStore _deletedStore;
+        private readonly IPictureReadStore _pictureReadStore;
 
         public BlogPostController(
             ICommandBus commandBus,
             IBlogPostReadStore blogPostReadStore,
-            IDeletedBlogPostStore deletedStore)
+            IDeletedBlogPostStore deletedStore,
+            IPictureReadStore pictureReadStore)
         {
             _commandBus = commandBus;
             _blogPostReadStore = blogPostReadStore;
             _deletedStore = deletedStore;
+            _pictureReadStore = pictureReadStore;
         }
 
         [HttpGet]
@@ -128,107 +129,19 @@ namespace Uncas.NowSite.Web.Controllers
             // TODO: Read bytes from stream and use them in command:
             Stream fileStream = file.InputStream;
 
+            _commandBus.Send(new UploadPictureCommand
+            {
+                PictureId = pictureId,
+                FileName = fileName,
+                FileStream = fileStream
+            });
+            string photoUrl =
+                _pictureReadStore.GetById(pictureId).PictureUrl;
+
             // TODO: Use command:
-            string photoUrl = UploadPicture(
-                blogPostId, 
-                pictureId, 
-                fileName, 
-                fileStream);
+            // AddPictureToBlogPost(blogPostId, pictureId)
 
-            // TODO: Get URL from read query:
             return Redirect(photoUrl);
-        }
-
-        private string UploadPicture(
-            Guid blogPostId,
-            Guid pictureId,
-            string fileName,
-            Stream fileStream)
-        {
-            PicasaService service = new PicasaService("NowSite");
-            string userName = "username@gmail.com";
-            service.setUserCredentials(
-                userName,
-                "pwd");
-
-            string albumTitle = "NowSite";
-            if (!DoesAlbumExist(service, albumTitle))
-            {
-                CreateAlbum(service, albumTitle);
-            }
-
-            string albumId = GetAlbumId(service, albumTitle);
-
-            return AddPhoto(
-                service,
-                albumId,
-                fileName,
-                fileStream);
-        }
-
-        private string GetAlbumId(
-            PicasaService service,
-            string albumTitle)
-        {
-            AlbumQuery query = new AlbumQuery(
-                           PicasaQuery.CreatePicasaUri("default"));
-            PicasaFeed feed = service.Query(query);
-            foreach (PicasaEntry entry in feed.Entries)
-            {
-                if (albumTitle.Equals(entry.Title.Text))
-                {
-                    return entry.Id.AbsoluteUri.Split('/').Last();
-                }
-            }
-
-            return null;
-        }
-
-        private bool DoesAlbumExist(
-            PicasaService service,
-            string albumName)
-        {
-            AlbumQuery query = new AlbumQuery(
-                           PicasaQuery.CreatePicasaUri("default"));
-            PicasaFeed feed = service.Query(query);
-            foreach (PicasaEntry entry in feed.Entries)
-            {
-                if (albumName.Equals(entry.Title.Text))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private void CreateAlbum(PicasaService service, string albumTitle)
-        {
-            var newEntry = new AlbumEntry();
-            newEntry.Title.Text = albumTitle;
-            newEntry.Summary.Text = "Album used for pictures for NowSite";
-            var ac = new AlbumAccessor(newEntry);
-            //set to "private" for a private album
-            ac.Access = "public";
-            var feedUri = new Uri(PicasaQuery.CreatePicasaUri("default"));
-            var createdEntry = (PicasaEntry)service.Insert(feedUri, newEntry);
-        }
-
-        private string AddPhoto(
-            PicasaService service,
-            string albumId,
-            string fileName,
-            Stream fileStream)
-        {
-            var postUri = new Uri(
-                PicasaQuery.CreatePicasaUri("default", albumId));
-            var entry = (PicasaEntry)service.Insert(
-                postUri,
-                fileStream,
-                "image/jpeg",
-                fileName);
-            fileStream.Close();
-            return entry.Media.Content.Url;
         }
     }
 }

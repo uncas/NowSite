@@ -8,22 +8,26 @@ namespace Uncas.NowSite.Web.Models.ReadStores
     public class BlogPostDenormalizer :
         IHandleDomainEvents<BlogPostCreatedEvent>,
         IHandleDomainEvents<BlogPostPublishedEvent>,
-        IHandleDomainEvents<BlogPostDeletedEvent>
+        IHandleDomainEvents<BlogPostDeletedEvent>,
+        IHandleDomainEvents<PictureCreatedEvent>
     {
         private readonly IBlogPostMasterStore _masterStore;
         private readonly IBlogPostReadStore _readStore;
         private readonly IDeletedBlogPostStore _deletedStore;
+        private readonly IPictureReadStore _pictureReadStore;
         private readonly IEventStore _eventStore;
 
         public BlogPostDenormalizer(
             IBlogPostMasterStore masterStore,
             IBlogPostReadStore readStore,
             IDeletedBlogPostStore deletedStore,
+            IPictureReadStore pictureReadStore,
             IEventStore eventStore)
         {
             _masterStore = masterStore;
             _readStore = readStore;
             _deletedStore = deletedStore;
+            _pictureReadStore = pictureReadStore;
             _eventStore = eventStore;
         }
 
@@ -61,6 +65,15 @@ namespace Uncas.NowSite.Web.Models.ReadStores
                 Id = domainEvent.AggregateRootId,
                 Title = domainEvent.Title,
                 Content = domainEvent.Content
+            });
+        }
+
+        public void Handle(PictureCreatedEvent domainEvent)
+        {
+            _pictureReadStore.Add(new PictureReadModel
+            {
+                Id = domainEvent.AggregateRootId,
+                PictureUrl = domainEvent.PictureUrl
             });
         }
     }
