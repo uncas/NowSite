@@ -51,14 +51,26 @@ namespace Uncas.NowSite.Web
             IEnumerable<Type> domainEventTypes,
             Guid aggregateRootId)
         {
-            return GetEventsByEventTypes(domainEventTypes).
-                Where(x => x.AggregateRootId == aggregateRootId);
+            var eventInfos = GetEventInfosForAggregateRoot(aggregateRootId);
+            return GetEventsByEventTypes(domainEventTypes, eventInfos);
         }
 
         public IEnumerable<DomainEvent> GetEventsByEventTypes(
             IEnumerable<Type> domainEventTypes)
         {
             var eventInfos = GetEventInfos();
+            return GetEventsByEventTypes(domainEventTypes, eventInfos);
+        }
+
+        public void Insert(IEnumerable<DomainEvent> domainEvents)
+        {
+            _fileEventStore.Insert(domainEvents);
+        }
+
+        private IEnumerable<DomainEvent> GetEventsByEventTypes(
+            IEnumerable<Type> domainEventTypes,
+            IEnumerable<dynamic> eventInfos)
+        {
             var domainEvents = new List<DomainEvent>();
             foreach (var eventInfo in eventInfos)
             {
@@ -75,17 +87,29 @@ namespace Uncas.NowSite.Web
             return domainEvents;
         }
 
-        public void Insert(IEnumerable<DomainEvent> domainEvents)
-        {
-            _fileEventStore.Insert(domainEvents);
-        }
-
         private IEnumerable<dynamic> GetEventInfos()
         {
-            return from filePath in Directory.GetFiles(
-                       _baseDirectory,
-                       "*.xml",
-                       SearchOption.AllDirectories)
+            string[] filePaths = Directory.GetFiles(
+                _baseDirectory,
+                "*.xml",
+                SearchOption.AllDirectories);
+            return GetEventInfos(filePaths);
+        }
+
+        private IEnumerable<dynamic> GetEventInfosForAggregateRoot(
+            Guid aggregateRootId)
+        {
+            var aggregateRootDirectory =
+                Path.Combine(
+                _baseDirectory,
+                aggregateRootId.ToString());
+            string[] filePaths = Directory.GetFiles(aggregateRootDirectory);
+            return GetEventInfos(filePaths);
+        }
+
+        private static IEnumerable<dynamic> GetEventInfos(string[] filePaths)
+        {
+            return from filePath in filePaths
                    let fileName = Path.GetFileNameWithoutExtension(filePath)
                    where fileName != null
                    let sequence = int.Parse(fileName)
