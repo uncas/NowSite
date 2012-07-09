@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using StackExchange.Profiling;
 
 namespace Uncas.NowSite.Web
 {
@@ -31,6 +32,14 @@ namespace Uncas.NowSite.Web
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.IsLocal)
+            {
+                MiniProfiler.Start();
+            }
         }
 
         protected void Application_End()
