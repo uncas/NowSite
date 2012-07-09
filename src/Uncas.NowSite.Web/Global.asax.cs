@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using StackExchange.Profiling;
+using StackExchange.Profiling.MVCHelpers;
 
 namespace Uncas.NowSite.Web
 {
@@ -29,14 +30,14 @@ namespace Uncas.NowSite.Web
             AreaRegistration.RegisterAllAreas();
             _bootstrapper = new Bootstrapper();
             _bootstrapper.Start();
-
+            GlobalFilters.Filters.Add(new ProfilingActionFilter());
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsLocal)
+            if (Request.IsLocal || Request.IsAuthenticated)
             {
                 MiniProfiler.Start();
             }

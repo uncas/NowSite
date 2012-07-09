@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using StackExchange.Profiling;
 using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers
@@ -17,13 +16,8 @@ namespace Uncas.NowSite.Web.Controllers
 
         public ActionResult Index()
         {
-            IEnumerable<BlogPostReadModel> blogPosts;
-            var profiler = MiniProfiler.Current;
-            using (profiler.Step("Get blog posts from read store"))
-            {
-                blogPosts = _blogPostReadStore.GetAll();
-            }
-
+            IEnumerable<BlogPostReadModel> blogPosts
+                = _blogPostReadStore.GetAll();
             return View(blogPosts);
         }
 
