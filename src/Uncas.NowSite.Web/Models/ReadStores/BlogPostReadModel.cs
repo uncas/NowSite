@@ -12,12 +12,14 @@ namespace Uncas.NowSite.Web.Models.ReadStores
         public DateTime Created { get; set; }
         public DateTime Published { get; set; }
         public IEnumerable<PictureReadModel> Pictures { get; set; }
-        
+
         public PictureReadModel PrimaryPicture
         {
             get
             {
-                return Pictures.FirstOrDefault();
+                return Pictures != null ?
+                    Pictures.FirstOrDefault() :
+                    null;
             }
         }
     }
