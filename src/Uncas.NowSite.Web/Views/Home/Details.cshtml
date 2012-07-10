@@ -27,6 +27,12 @@
         @Html.DisplayFor(model => model.Published)
     </div>
 </fieldset>
+@foreach (var picture in Model.Pictures)
+{
+    <a href="@picture.PictureUrl" class="BlogPostPicture">
+        <img src="@picture.PictureUrl" alt="Blog post picture" />
+    </a>
+}
 @if (User.Identity.IsAuthenticated)
 {
     <p>

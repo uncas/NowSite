@@ -73,3 +73,8 @@ textarea
 {
     display: none;
 }
+
+.BlogPostPicture img
+{
+    height: 200px;
+}

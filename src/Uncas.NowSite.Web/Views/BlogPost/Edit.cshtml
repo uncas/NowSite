@@ -42,5 +42,7 @@
 
 @foreach (var picture in Model.Pictures)
 {
-    <img src="@picture.PictureUrl" alt="Blog post picture" />
+    <a href="@picture.PictureUrl" class="BlogPostPicture">
+        <img src="@picture.PictureUrl" alt="Blog post picture" />
+    </a>
 }
