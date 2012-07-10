@@ -47,16 +47,16 @@ namespace Uncas.NowSite.Web.Controllers
         public ActionResult Create()
         {
             Guid id = Guid.NewGuid();
-            var createCommand = new CreateBlogPostCommand(id);
-            _commandBus.Send(createCommand);
+            var create = new CreateBlogPostCommand(id);
+            _commandBus.Send(create);
             return RedirectToAction("Edit", new { id });
         }
 
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var createCommand = new StartEditBlogPostCommand(id);
-            _commandBus.Send(createCommand);
+            var startEdit = new StartEditBlogPostCommand(id);
+            _commandBus.Send(startEdit);
             EditBlogPostReadModel blogPost = _editBlogPostReadStore.GetById(id);
             return View(new EditBlogPostInputModel
             {
