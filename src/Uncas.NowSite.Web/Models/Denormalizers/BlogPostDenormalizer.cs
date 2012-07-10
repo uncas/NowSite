@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SimpleCqrs.Eventing;
 using Uncas.NowSite.Web.Models.Events;
@@ -39,9 +40,15 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
 
         public void Handle(BlogPostCreatedEvent domainEvent)
         {
+            Guid id = domainEvent.AggregateRootId;
             _masterStore.Add(new BlogPostMasterModel
             {
-                Id = domainEvent.AggregateRootId
+                Id = id
+            });
+            _editBlogPostReadStore.Add(new EditBlogPostReadModel
+            {
+                Id = id,
+                Pictures = new List<PictureReadModel>()
             });
         }
 
