@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using Google.GData.Photos;
@@ -34,10 +35,13 @@ namespace Uncas.NowSite.Web.Models.CommandHandlers
             Stream fileStream)
         {
             PicasaService service = new PicasaService("NowSite");
-            string userName = "username@gmail.com";
+            string userName = 
+                ConfigurationManager.AppSettings["GoogleAccount.UserName"];
+            string password =
+                ConfigurationManager.AppSettings["GoogleAccount.Password"];
             service.setUserCredentials(
                 userName,
-                "pwd");
+                password);
 
             string albumTitle = "NowSite";
             if (!DoesAlbumExist(service, albumTitle))

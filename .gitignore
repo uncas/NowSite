@@ -20,3 +20,4 @@ output/
 
 /scripts/private.ps1
 /src/data/
+/src/Uncas.NowSite.Web/Web.appSettings.config

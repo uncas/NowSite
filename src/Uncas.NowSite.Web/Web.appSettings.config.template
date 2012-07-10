@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+<appSettings>
+  <add key="ClientValidationEnabled" value="true" />
+  <add key="GoogleAccount.UserName" value="username@gmail.com" />
+  <add key="GoogleAccount.Password" value="pwd" />
+  <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+  <add key="webpages:Version" value="1.0.0.0" />
+</appSettings>
