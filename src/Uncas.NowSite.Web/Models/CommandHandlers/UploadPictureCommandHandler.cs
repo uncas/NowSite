@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Google.GData.Photos;
 using SimpleCqrs.Domain;
+using Uncas.NowSite.Web.Models.Aggregates;
 using Uncas.NowSite.Web.Models.Commands;
 
 namespace Uncas.NowSite.Web.Models.CommandHandlers

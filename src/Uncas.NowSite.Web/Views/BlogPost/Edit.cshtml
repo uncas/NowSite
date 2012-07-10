@@ -1,4 +1,4 @@
-﻿@model Uncas.NowSite.Web.Controllers.EditBlogPostInputModel
+﻿@model Uncas.NowSite.Web.Models.InputModels.EditBlogPostInputModel
 @{
     ViewBag.Title = "Edit blog post";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,4 +38,9 @@
     @Html.Hidden("blogPostId", Model.Id)
     <input type="file" name="file" />
     <input type="submit" value="Upload picture" />
+}
+
+@foreach (var picture in Model.Pictures)
+{
+    <img src="@picture.PictureUrl" alt="Blog post picture" />
 }

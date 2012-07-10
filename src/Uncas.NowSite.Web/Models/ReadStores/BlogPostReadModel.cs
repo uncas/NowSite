@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Uncas.NowSite.Web.Models.Infrastructure;
 
 namespace Uncas.NowSite.Web.Models.ReadStores
@@ -9,5 +10,6 @@ namespace Uncas.NowSite.Web.Models.ReadStores
         public string Content { get; set; }
         public DateTime Created { get; set; }
         public DateTime Published { get; set; }
+        public IEnumerable<PictureReadModel> Pictures { get; set; }
     }
 }

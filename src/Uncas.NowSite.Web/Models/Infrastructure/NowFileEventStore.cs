@@ -89,6 +89,8 @@ namespace Uncas.NowSite.Web
 
         private IEnumerable<dynamic> GetEventInfos()
         {
+            if (!Directory.Exists(_baseDirectory))
+                return new List<dynamic>();
             string[] filePaths = Directory.GetFiles(
                 _baseDirectory,
                 "*.xml",

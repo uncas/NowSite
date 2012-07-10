@@ -1,4 +1,6 @@
-﻿using SimpleCqrs.Eventing;
+﻿using System;
+using System.Collections.Generic;
+using SimpleCqrs.Eventing;
 
 namespace Uncas.NowSite.Web.Models.Events
 {
@@ -6,5 +8,6 @@ namespace Uncas.NowSite.Web.Models.Events
     {
         public string Title { get; set; }
         public string Content { get; set; }
+        public IEnumerable<Guid> Pictures { get; set; }
     }
 }

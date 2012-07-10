@@ -63,6 +63,10 @@ namespace Uncas.NowSite.Web
                 c => new PictureReadStore(
                     GetDataDirectory("ReadStore.db"),
                     c.Resolve<IStringSerializer>()));
+            container.RegisterFactory<IEditBlogPostReadStore>(
+                c => new EditBlogPostReadStore(
+                    GetDataDirectory("ReadStore.db"),
+                    c.Resolve<IStringSerializer>()));
             return container;
         }
 

@@ -2,8 +2,8 @@
 
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
-    public interface IDeletedBlogPostStore :
-        IReadStore<DeletedBlogPostModel>
+    public interface IEditBlogPostReadStore :
+          IReadStore<EditBlogPostReadModel>
     {
     }
 }

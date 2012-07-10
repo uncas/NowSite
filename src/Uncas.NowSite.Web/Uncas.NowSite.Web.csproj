@@ -117,6 +117,14 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="App_Start\MiniProfiler.cs" />
+    <Compile Include="Models\ReadStores\EditBlogPostReadStore.cs" />
+    <Compile Include="Models\InputModels\PictureInputModel.cs" />
+    <Compile Include="Models\ReadStores\IEditBlogPostReadStore.cs" />
+    <Compile Include="Models\ReadStores\EditBlogPostReadModel.cs" />
+    <Compile Include="Models\Aggregates\BlogPostPictures.cs" />
+    <Compile Include="Models\Events\PictureAddedToBlogPostEvent.cs" />
+    <Compile Include="Models\CommandHandlers\AddPictureToBlogPostCommandHandler.cs" />
+    <Compile Include="Models\Commands\AddPictureToBlogPostCommand.cs" />
     <Compile Include="Models\Aggregates\Picture.cs" />
     <Compile Include="Models\Events\PictureCreatedEvent.cs" />
     <Compile Include="Models\CommandHandlers\UploadPictureCommandHandler.cs" />

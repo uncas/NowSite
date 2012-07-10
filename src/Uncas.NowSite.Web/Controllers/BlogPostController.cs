@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SimpleCqrs.Commanding;
@@ -14,21 +15,23 @@ namespace Uncas.NowSite.Web.Controllers
     public class BlogPostController : BaseController
     {
         private readonly ICommandBus _commandBus;
-
         private readonly IBlogPostReadStore _blogPostReadStore;
         private readonly IDeletedBlogPostStore _deletedStore;
         private readonly IPictureReadStore _pictureReadStore;
+        private readonly IEditBlogPostReadStore _editBlogPostReadStore;
 
         public BlogPostController(
             ICommandBus commandBus,
             IBlogPostReadStore blogPostReadStore,
             IDeletedBlogPostStore deletedStore,
+            IEditBlogPostReadStore editBlogPostReadStore,
             IPictureReadStore pictureReadStore)
         {
             _commandBus = commandBus;
             _blogPostReadStore = blogPostReadStore;
             _deletedStore = deletedStore;
             _pictureReadStore = pictureReadStore;
+            _editBlogPostReadStore = editBlogPostReadStore;
         }
 
         [HttpGet]
@@ -67,12 +70,18 @@ namespace Uncas.NowSite.Web.Controllers
         {
             var createCommand = new StartEditBlogPostCommand(id);
             _commandBus.Send(createCommand);
-            BlogPostReadModel blogPost = _blogPostReadStore.GetById(id);
+            EditBlogPostReadModel blogPost = _editBlogPostReadStore.GetById(id);
             return View(new EditBlogPostInputModel
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
-                Content = blogPost.Content
+                Content = blogPost.Content,
+                Pictures = blogPost.Pictures.Select(
+                    x => new PictureInputModel
+                    {
+                        PictureId = x.Id,
+                        PictureUrl = x.PictureUrl
+                    })
             });
         }
 
@@ -131,13 +140,13 @@ namespace Uncas.NowSite.Web.Controllers
                 FileStream = file.InputStream
             });
 
-            // TODO: Use command:
-            //_commandBus.Send(
-            //    new AddPictureToBlogPostCommand(blogPostId, pictureId);
+            _commandBus.Send(new AddPictureToBlogPostCommand
+            {
+                BlogPostId = blogPostId,
+                PictureId = pictureId
+            });
 
-            string photoUrl =
-                _pictureReadStore.GetById(pictureId).PictureUrl;
-            return Redirect(photoUrl);
+            return RedirectToAction("Edit", new { id = blogPostId });
         }
     }
 }
