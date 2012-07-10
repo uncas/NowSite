@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
 using Uncas.NowSite.Web.Models.InputModels;
+using Uncas.NowSite.Web.Models.ReadModels;
 using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers

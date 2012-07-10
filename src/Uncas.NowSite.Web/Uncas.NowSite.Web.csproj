@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper">
@@ -120,7 +121,7 @@
     <Compile Include="Models\ReadStores\EditBlogPostReadStore.cs" />
     <Compile Include="Models\InputModels\PictureInputModel.cs" />
     <Compile Include="Models\ReadStores\IEditBlogPostReadStore.cs" />
-    <Compile Include="Models\ReadStores\EditBlogPostReadModel.cs" />
+    <Compile Include="Models\ReadModels\EditBlogPostReadModel.cs" />
     <Compile Include="Models\Aggregates\BlogPostPictures.cs" />
     <Compile Include="Models\Events\PictureAddedToBlogPostEvent.cs" />
     <Compile Include="Models\CommandHandlers\AddPictureToBlogPostCommandHandler.cs" />
@@ -139,7 +140,7 @@
     <Compile Include="Models\Events\BlogPostDeletedEvent.cs" />
     <Compile Include="Models\CommandHandlers\DeleteBlogPostCommandHandler.cs" />
     <Compile Include="Models\Commands\DeleteBlogPostCommand.cs" />
-    <Compile Include="Models\ReadStores\DeletedBlogPostModel.cs" />
+    <Compile Include="Models\ReadModels\DeletedBlogPostModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostMasterStore.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -166,9 +167,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\InputModels\LogOnInputModel.cs" />
-    <Compile Include="Models\ReadStores\BlogPostDenormalizer.cs" />
-    <Compile Include="Models\ReadStores\BlogPostMasterModel.cs" />
-    <Compile Include="Models\ReadStores\BlogPostReadModel.cs" />
+    <Compile Include="Models\Denormalizers\BlogPostDenormalizer.cs" />
+    <Compile Include="Models\ReadModels\BlogPostMasterModel.cs" />
+    <Compile Include="Models\ReadModels\BlogPostReadModel.cs" />
     <Compile Include="Models\ReadStores\BlogPostReadStore.cs" />
     <Compile Include="Models\Infrastructure\IReadStore.cs" />
     <Compile Include="Models\Infrastructure\ReadModel.cs" />
@@ -179,7 +180,7 @@
     <Compile Include="Models\Infrastructure\ReadDataModel.cs" />
     <Compile Include="Models\Infrastructure\NowFileEventStore.cs" />
     <Compile Include="Models\ReadStores\IPictureReadStore.cs" />
-    <Compile Include="Models\ReadStores\PictureReadModel.cs" />
+    <Compile Include="Models\ReadModels\PictureReadModel.cs" />
     <Compile Include="NowSiteRuntime.cs" />
     <Compile Include="Models\ReadStores\PictureReadStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,6 +236,7 @@
   <ItemGroup>
     <None Include="Web.appSettings.config.template" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

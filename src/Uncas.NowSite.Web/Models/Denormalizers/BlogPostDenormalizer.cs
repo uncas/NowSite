@@ -2,8 +2,10 @@
 using System.Linq;
 using SimpleCqrs.Eventing;
 using Uncas.NowSite.Web.Models.Events;
+using Uncas.NowSite.Web.Models.ReadModels;
+using Uncas.NowSite.Web.Models.ReadStores;
 
-namespace Uncas.NowSite.Web.Models.ReadStores
+namespace Uncas.NowSite.Web.Models.Denormalizers
 {
     public class BlogPostDenormalizer :
         IHandleDomainEvents<BlogPostCreatedEvent>,

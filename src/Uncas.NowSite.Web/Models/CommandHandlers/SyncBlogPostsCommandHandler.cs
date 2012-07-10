@@ -1,7 +1,7 @@
 ﻿using SimpleCqrs.Commanding;
 using SimpleCqrs.Utilites;
 using Uncas.NowSite.Web.Models.Commands;
-using Uncas.NowSite.Web.Models.ReadStores;
+using Uncas.NowSite.Web.Models.Denormalizers;
 
 namespace Uncas.NowSite.Web.Models.CommandHandlers
 {

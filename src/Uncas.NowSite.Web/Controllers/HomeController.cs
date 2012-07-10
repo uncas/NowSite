@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Uncas.NowSite.Web.Models.ReadModels;
 using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers
