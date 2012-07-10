@@ -173,6 +173,7 @@
     <Compile Include="Models\ReadStores\IPictureReadStore.cs" />
     <Compile Include="Models\ReadStores\PictureReadModel.cs" />
     <Compile Include="NowSiteRuntime.cs" />
+    <Compile Include="Models\ReadStores\PictureReadStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\IStringSerializer.cs" />
     <Compile Include="Utilities\JsonStringSerializer.cs" />

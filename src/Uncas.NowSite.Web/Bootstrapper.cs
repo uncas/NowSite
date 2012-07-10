@@ -59,6 +59,10 @@ namespace Uncas.NowSite.Web
                 c => new DeletedBlogPostStore(
                     GetDataDirectory("ReadStore.db"),
                     c.Resolve<IStringSerializer>()));
+            container.RegisterFactory<IPictureReadStore>(
+                c => new PictureReadStore(
+                    GetDataDirectory("ReadStore.db"),
+                    c.Resolve<IStringSerializer>()));
             return container;
         }
 

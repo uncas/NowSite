@@ -6,12 +6,11 @@ namespace Uncas.NowSite.Web.Models.CommandHandlers
 {
     public class Picture : AggregateRoot
     {
-        private Guid _id;
         private string _pictureUrl;
 
         public Picture(Guid id, string pictureUrl)
         {
-            _id = id;
+            Id = id;
             _pictureUrl = pictureUrl;
             Apply(new PictureCreatedEvent
             {
