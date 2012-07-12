@@ -51,7 +51,9 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
 
         private string GetAllCacheKey<T>() where T : ReadModel
         {
-            return GetCacheKey<T>(new Guid());
+            return string.Format(
+               "{0}-All",
+               GetModelName<T>());
         }
     }
 }
