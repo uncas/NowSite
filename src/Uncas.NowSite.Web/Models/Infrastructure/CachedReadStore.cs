@@ -4,9 +4,7 @@ using Uncas.NowSite.Web.Utilities;
 
 namespace Uncas.NowSite.Web.Models.Infrastructure
 {
-    public abstract class CachedReadStore<T> :
-        ReadStore<T>
-        where T : ReadModel
+    public abstract class CachedReadStore : ReadStore
     {
         private readonly ICache _cache;
 
@@ -20,7 +18,7 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
             _cache = cache;
         }
 
-        public override void Add(T model)
+        public override void Add<T>(T model)
         {
             base.Add(model);
             _cache.Remove(GetCacheKey(model.Id));

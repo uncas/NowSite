@@ -5,7 +5,7 @@ using Uncas.NowSite.Web.Utilities;
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
     public class DeletedBlogPostStore :
-        ReadStore<DeletedBlogPostModel>,
+        ReadStore,
         IDeletedBlogPostStore
     {
         public DeletedBlogPostStore(

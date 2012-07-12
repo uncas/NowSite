@@ -5,7 +5,7 @@ using Uncas.NowSite.Web.Utilities;
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
     public class BlogPostMasterStore :
-        ReadStore<BlogPostMasterModel>,
+        ReadStore,
         IBlogPostMasterStore
     {
         public BlogPostMasterStore(

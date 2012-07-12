@@ -5,7 +5,7 @@ using Uncas.NowSite.Web.Utilities;
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
     public class BlogPostReadStore :
-        CachedReadStore<BlogPostReadModel>,
+        CachedReadStore,
         IBlogPostReadStore
     {
         public BlogPostReadStore(

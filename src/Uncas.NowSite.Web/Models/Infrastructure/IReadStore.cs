@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Uncas.NowSite.Web.Models.Infrastructure
 {
-    public interface IReadStore<T> where T : ReadModel
+    public interface IReadStore
     {
-        void Add(T blogPost);
-        IEnumerable<T> GetAll<T>();
-        T GetById<T>(Guid id);
-        void Delete<T>(Guid id);
+        void Add<T>(T blogPost) where T : ReadModel;
+        IEnumerable<T> GetAll<T>() where T : ReadModel;
+        T GetById<T>(Guid id) where T : ReadModel;
+        void Delete<T>(Guid id) where T : ReadModel;
     }
 }

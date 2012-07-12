@@ -4,7 +4,7 @@ using Uncas.NowSite.Web.Models.ReadModels;
 namespace Uncas.NowSite.Web.Models.ReadStores
 {
     public interface IPictureReadStore :
-         IReadStore<PictureReadModel>
+         IReadStore
     {
     }
 }

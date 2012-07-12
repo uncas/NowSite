@@ -8,9 +8,8 @@ using Uncas.NowSite.Web.Utilities;
 
 namespace Uncas.NowSite.Web.Models.Infrastructure
 {
-    public abstract class ReadStore<T> :
-        IReadStore<T>
-        where T : ReadModel
+    public abstract class ReadStore :
+        IReadStore
     {
         private readonly string _connectionString;
         private readonly IStringSerializer _stringSerializer;
@@ -29,7 +28,7 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
             Initialize();
         }
 
-        public virtual void Add(T model)
+        public virtual void Add<T>(T model) where T : ReadModel
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -55,7 +54,7 @@ WHERE Id = @Id;
             }
         }
 
-        public virtual IEnumerable<T> GetAll<T>()
+        public virtual IEnumerable<T> GetAll<T>() where T : ReadModel
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -66,7 +65,7 @@ WHERE Id = @Id;
             }
         }
 
-        public virtual T GetById<T>(Guid id)
+        public virtual T GetById<T>(Guid id) where T : ReadModel
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -77,7 +76,7 @@ WHERE Id = @Id;
             }
         }
 
-        public virtual void Delete<T>(Guid id)
+        public virtual void Delete<T>(Guid id) where T : ReadModel
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -118,7 +117,7 @@ CREATE TABLE {0}
             _initialized = true;
         }
 
-        private string Serialize(T readModel)
+        private string Serialize<T>(T readModel)
         {
             return _stringSerializer.Serialize(readModel);
         }
