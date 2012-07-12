@@ -16,14 +16,11 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
         IHandleDomainEvents<PictureAddedToBlogPostEvent>
     {
         private readonly IReadStore _readStore;
-        private readonly IEventStore _eventStore;
 
         public BlogPostDenormalizer(
-            IReadStore readStore,
-            IEventStore eventStore)
+            IReadStore readStore)
         {
             _readStore = readStore;
-            _eventStore = eventStore;
         }
 
         public void Handle(BlogPostCreatedEvent domainEvent)
@@ -31,7 +28,8 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
             Guid id = domainEvent.AggregateRootId;
             _readStore.Add(new BlogPostMasterModel
             {
-                Id = id
+                Id = id,
+                Created = domainEvent.EventDate
             });
             _readStore.Add(new EditBlogPostReadModel
             {
@@ -44,10 +42,7 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
         {
             Guid id = domainEvent.AggregateRootId;
             _readStore.Delete<DeletedBlogPostModel>(id);
-            DomainEvent createdEvent =
-                _eventStore.GetEventsByEventTypes(
-                new[] { typeof(BlogPostCreatedEvent) },
-                id).SingleOrDefault();
+            var master = _readStore.GetById<BlogPostMasterModel>(id);
             IList<PictureReadModel> pictures = domainEvent.Pictures.Select(
                 pictureId => _readStore.GetById<PictureReadModel>(pictureId)).
                 ToList();
@@ -56,7 +51,7 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
                 Id = id,
                 Title = domainEvent.Title,
                 Content = domainEvent.Content,
-                Created = createdEvent.EventDate,
+                Created = master.Created,
                 Published = domainEvent.EventDate,
                 Pictures = pictures
             });

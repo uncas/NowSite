@@ -1,4 +1,5 @@
-﻿using Uncas.NowSite.Web.Models.Infrastructure;
+﻿using System;
+using Uncas.NowSite.Web.Models.Infrastructure;
 
 namespace Uncas.NowSite.Web.Models.ReadModels
 {
@@ -8,5 +9,7 @@ namespace Uncas.NowSite.Web.Models.ReadModels
         {
             get { return "BlogPostMasterModel"; }
         }
+
+        public DateTime Created { get; set; }
     }
 }
