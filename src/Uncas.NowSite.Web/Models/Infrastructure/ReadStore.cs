@@ -8,28 +8,26 @@ using Uncas.NowSite.Web.Utilities;
 
 namespace Uncas.NowSite.Web.Models.Infrastructure
 {
-    public abstract class ReadStore :
-        IReadStore
+    public abstract class ReadStore : IReadStore
     {
         private readonly string _connectionString;
         private readonly IStringSerializer _stringSerializer;
-        protected readonly string _modelName;
-        private bool _initialized;
+        private readonly IList<string> _initializedModelNames;
 
         protected ReadStore(
             string path,
-            IStringSerializer stringSerializer,
-            string modelName)
+            IStringSerializer stringSerializer)
         {
             _connectionString =
                 string.Format(@"Data Source={0};Version=3;", path);
             _stringSerializer = stringSerializer;
-            _modelName = modelName;
-            Initialize();
+            _initializedModelNames = new List<string>();
         }
 
         public virtual void Add<T>(T model) where T : ReadModel
         {
+            string modelName = model.ModelName;
+            Initialize(modelName);
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
@@ -43,7 +41,7 @@ UPDATE {0}
 SET Model = @Model,
     Modified = @Modified
 WHERE Id = @Id;
-", _modelName),
+", modelName),
                     new
                     {
                         Id = model.Id,
@@ -56,40 +54,52 @@ WHERE Id = @Id;
 
         public virtual IEnumerable<T> GetAll<T>() where T : ReadModel
         {
+            string modelName = GetModelName<T>();
+            Initialize(modelName);
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
                 var readModel = connection.Query<dynamic>(
-                    string.Format("SELECT Id, Model, Created, Modified FROM {0} ORDER BY Created DESC", _modelName));
+                    string.Format("SELECT Id, Model, Created, Modified FROM {0} ORDER BY Created DESC", modelName));
                 return readModel.Select(Deserialize<T>);
             }
         }
 
         public virtual T GetById<T>(Guid id) where T : ReadModel
         {
+            string modelName = GetModelName<T>();
+            Initialize(modelName);
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
                 return connection.Query<dynamic>(
-                    string.Format("SELECT Id, Model, Created, Modified FROM {0} WHERE Id = @Id", _modelName),
+                    string.Format("SELECT Id, Model, Created, Modified FROM {0} WHERE Id = @Id", modelName),
                     new { Id = id }).Select(Deserialize<T>).SingleOrDefault();
             }
         }
 
         public virtual void Delete<T>(Guid id) where T : ReadModel
         {
+            string modelName = GetModelName<T>();
+            Initialize(modelName);
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
                 connection.Execute(
-                    string.Format("DELETE FROM {0} WHERE Id = @Id", _modelName),
+                    string.Format("DELETE FROM {0} WHERE Id = @Id", modelName),
                     new { Id = id });
             }
         }
 
-        private void Initialize()
+        protected static string GetModelName<T>() where T : ReadModel
         {
-            if (_initialized)
+            var dummy = (T)typeof(T).GetConstructor(Type.EmptyTypes).Invoke(null);
+            return dummy.ModelName;
+        }
+
+        private void Initialize(string modelName)
+        {
+            if (_initializedModelNames.Contains(modelName))
             {
                 return;
             }
@@ -100,7 +110,7 @@ WHERE Id = @Id;
                 string existsSql =
                     string.Format(
                     "SELECT name FROM sqlite_master WHERE type='table' AND name='{0}'",
-                    _modelName);
+                    modelName);
                 var existing = connection.Query<string>(existsSql);
                 if (existing.Count() == 1)
                 {
@@ -110,11 +120,11 @@ WHERE Id = @Id;
                 string createSql = string.Format(
                     @"
 CREATE TABLE {0}
-(Id UNIQUEIDENTIFIER PRIMARY KEY, Model TEXT, Created DATETIME, Modified DATETIME);", _modelName);
+(Id UNIQUEIDENTIFIER PRIMARY KEY, Model TEXT, Created DATETIME, Modified DATETIME);", modelName);
                 connection.Execute(createSql);
             }
 
-            _initialized = true;
+            _initializedModelNames.Add(modelName);
         }
 
         private string Serialize<T>(T readModel)

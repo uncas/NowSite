@@ -13,6 +13,11 @@ namespace Uncas.NowSite.Web.Models.ReadModels
         public DateTime Published { get; set; }
         public IEnumerable<PictureReadModel> Pictures { get; set; }
 
+        public override string ModelName
+        {
+            get { return "BlogPostReadModel"; }
+        }
+
         public PictureReadModel PrimaryPicture
         {
             get

@@ -8,5 +8,10 @@ namespace Uncas.NowSite.Web.Models.ReadModels
         public string Title { get; set; }
         public string Content { get; set; }
         public IList<PictureReadModel> Pictures { get; set; }
+
+        public override string ModelName
+        {
+            get { return "EditBlogPostReadModel"; }
+        }
     }
 }
