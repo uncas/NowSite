@@ -12,7 +12,6 @@ namespace Uncas.NowSite.Web.Models.ReadStores
             : base(
             path,
             stringSerializer,
-            "BlogPostReadModel",
             cache)
         {
         }

@@ -4,14 +4,13 @@ using Uncas.NowSite.Web.Utilities;
 
 namespace Uncas.NowSite.Web.Models.Infrastructure
 {
-    public abstract class CachedReadStore : ReadStore
+    public class CachedReadStore : ReadStore
     {
         private readonly ICache _cache;
 
         protected CachedReadStore(
             string path,
             IStringSerializer stringSerializer,
-            string modelName,
             ICache cache)
             : base(path, stringSerializer)
         {

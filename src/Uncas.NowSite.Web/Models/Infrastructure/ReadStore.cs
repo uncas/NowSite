@@ -8,7 +8,7 @@ using Uncas.NowSite.Web.Utilities;
 
 namespace Uncas.NowSite.Web.Models.Infrastructure
 {
-    public abstract class ReadStore : IReadStore
+    public class ReadStore : IReadStore
     {
         private readonly string _connectionString;
         private readonly IStringSerializer _stringSerializer;
