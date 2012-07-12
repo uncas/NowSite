@@ -33,16 +33,18 @@
     </fieldset>
 }
 
-@using (Html.BeginForm("UploadPicture", "BlogPost", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.Hidden("blogPostId", Model.Id)
-    <input type="file" name="file" />
-    <input type="submit" value="Upload picture" />
-}
-
-@foreach (var picture in Model.Pictures)
-{
-    <a href="@picture.PictureUrl" class="BlogPostPicture">
-        <img src="@picture.PictureUrl" alt="Blog post picture" />
-    </a>
-}
+<div>
+    @using (Ajax.BeginForm(
+        "UploadPicture",
+        new { controller = "BlogPost" },
+        new AjaxOptions { UpdateTargetId = "pictures" },
+        new { enctype = "multipart/form-data" }))
+    {
+        @Html.Hidden("blogPostId", Model.Id)
+        <input type="file" name="file" />
+        <input type="submit" value="Upload picture" />
+    }
+</div>
+<div id="pictures">
+    @Html.Partial("Pictures", Model)
+</div>

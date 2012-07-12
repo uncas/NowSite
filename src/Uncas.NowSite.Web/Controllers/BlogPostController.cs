@@ -109,14 +109,34 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public PartialViewResult Pictures(
+            Guid blogPostId)
+        {
+            EditBlogPostReadModel blogPost =
+                _editBlogPostReadStore.GetById(blogPostId);
+            return PartialView("Pictures", new EditBlogPostInputModel
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                Content = blogPost.Content,
+                Pictures = blogPost.Pictures.Select(
+                    x => new PictureInputModel
+                    {
+                        PictureId = x.Id,
+                        PictureUrl = x.PictureUrl
+                    })
+            });
+        }
+
         [HttpPost]
-        public ActionResult UploadPicture(
+        public PartialViewResult UploadPicture(
             Guid blogPostId,
             HttpPostedFileBase file)
         {
             if (file == null || file.ContentLength == 0)
             {
-                return Content("No file");
+                throw new InvalidOperationException("No file!");
             }
 
             Guid pictureId = Guid.NewGuid();
@@ -133,7 +153,7 @@ namespace Uncas.NowSite.Web.Controllers
                 PictureId = pictureId
             });
 
-            return RedirectToAction("Edit", new { id = blogPostId });
+            return Pictures(blogPostId);
         }
     }
 }
