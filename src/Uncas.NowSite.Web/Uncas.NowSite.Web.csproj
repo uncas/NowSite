@@ -177,7 +177,6 @@
     <Compile Include="Models\ReadStores\IDeletedBlogPostStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostMasterStore.cs" />
     <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
-    <Compile Include="Models\Infrastructure\ReadDataModel.cs" />
     <Compile Include="Models\Infrastructure\NowFileEventStore.cs" />
     <Compile Include="Models\ReadStores\IPictureReadStore.cs" />
     <Compile Include="Models\ReadModels\PictureReadModel.cs" />

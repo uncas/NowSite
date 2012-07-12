@@ -45,7 +45,7 @@ SET Model = @Model,
     Modified = @Modified
 WHERE Id = @Id;
 ", _modelName),
-                    new ReadDataModel
+                    new
                     {
                         Id = model.Id,
                         Created = SystemTime.Now(),
@@ -60,7 +60,7 @@ WHERE Id = @Id;
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
-                var readModel = connection.Query<ReadDataModel>(
+                var readModel = connection.Query<dynamic>(
                     string.Format("SELECT Id, Model, Created, Modified FROM {0} ORDER BY Created DESC", _modelName));
                 return readModel.Select(Deserialize);
             }
@@ -71,7 +71,7 @@ WHERE Id = @Id;
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Query<ReadDataModel>(
+                return connection.Query<dynamic>(
                     string.Format("SELECT Id, Model, Created, Modified FROM {0} WHERE Id = @Id", _modelName),
                     new { Id = id }).Select(Deserialize).SingleOrDefault();
             }
@@ -123,7 +123,7 @@ CREATE TABLE {0}
             return _stringSerializer.Serialize(readModel);
         }
 
-        private T Deserialize(ReadDataModel data)
+        private T Deserialize(dynamic data)
         {
             return _stringSerializer.Deserialize<T>(data.Model);
         }
