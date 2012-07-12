@@ -10,9 +10,13 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
 {
     public class ReadStore : IReadStore
     {
+        private static readonly IList<string> _initializedModelNames =
+            new List<string>();
+        private static readonly IDictionary<Type, string> _mappedModelNames =
+            new Dictionary<Type, string>();
+
         private readonly string _connectionString;
         private readonly IStringSerializer _stringSerializer;
-        private readonly IList<string> _initializedModelNames;
 
         protected ReadStore(
             string path,
@@ -21,7 +25,6 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
             _connectionString =
                 string.Format(@"Data Source={0};Version=3;", path);
             _stringSerializer = stringSerializer;
-            _initializedModelNames = new List<string>();
         }
 
         public virtual void Add<T>(T model) where T : ReadModel
@@ -91,10 +94,16 @@ WHERE Id = @Id;
             }
         }
 
-        protected static string GetModelName<T>() where T : ReadModel
+        protected string GetModelName<T>() where T : ReadModel
         {
-            var dummy = (T)typeof(T).GetConstructor(Type.EmptyTypes).Invoke(null);
-            return dummy.ModelName;
+            Type type = typeof(T);
+            if (_mappedModelNames.ContainsKey(type))
+                return _mappedModelNames[type];
+            var dummyInstance =
+                (T)type.GetConstructor(Type.EmptyTypes).Invoke(null);
+            string modelName = dummyInstance.ModelName;
+            _mappedModelNames.Add(type, modelName);
+            return modelName;
         }
 
         private void Initialize(string modelName)
