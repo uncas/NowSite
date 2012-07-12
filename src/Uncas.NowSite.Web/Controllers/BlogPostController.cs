@@ -39,7 +39,7 @@ namespace Uncas.NowSite.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<DeletedBlogPostModel> deletedPosts =
-                _deletedStore.GetAll();
+                _deletedStore.GetAll<DeletedBlogPostModel>();
             return View(deletedPosts);
         }
 
@@ -57,7 +57,8 @@ namespace Uncas.NowSite.Web.Controllers
         {
             var startEdit = new StartEditBlogPostCommand(id);
             _commandBus.Send(startEdit);
-            EditBlogPostReadModel blogPost = _editBlogPostReadStore.GetById(id);
+            EditBlogPostReadModel blogPost =
+                _editBlogPostReadStore.GetById<EditBlogPostReadModel>(id);
             return View(new EditBlogPostInputModel
             {
                 Id = blogPost.Id,

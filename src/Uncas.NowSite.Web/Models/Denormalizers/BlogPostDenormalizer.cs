@@ -55,13 +55,13 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
         public void Handle(BlogPostPublishedEvent domainEvent)
         {
             Guid id = domainEvent.AggregateRootId;
-            _deletedStore.Delete(id);
+            _deletedStore.Delete<DeletedBlogPostModel>(id);
             DomainEvent createdEvent =
                 _eventStore.GetEventsByEventTypes(
                 new[] { typeof(BlogPostCreatedEvent) },
                 id).SingleOrDefault();
             var pictures = domainEvent.Pictures.Select(
-                pictureId => _pictureReadStore.GetById(pictureId)).
+                pictureId => _pictureReadStore.GetById<PictureReadModel>(pictureId)).
                 ToList();
             _readStore.Add(new BlogPostReadModel
             {
@@ -84,8 +84,8 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
         public void Handle(BlogPostDeletedEvent domainEvent)
         {
             Guid id = domainEvent.AggregateRootId;
-            _readStore.Delete(id);
-            _editBlogPostReadStore.Delete(id);
+            _readStore.Delete<BlogPostReadModel>(id);
+            _editBlogPostReadStore.Delete<EditBlogPostReadModel>(id);
             _deletedStore.Add(new DeletedBlogPostModel
             {
                 Id = id,
@@ -106,9 +106,9 @@ namespace Uncas.NowSite.Web.Models.Denormalizers
         public void Handle(PictureAddedToBlogPostEvent domainEvent)
         {
             EditBlogPostReadModel readModel =
-                _editBlogPostReadStore.GetById(domainEvent.AggregateRootId);
+                _editBlogPostReadStore.GetById<EditBlogPostReadModel>(domainEvent.AggregateRootId);
             readModel.Pictures.Add(
-                _pictureReadStore.GetById(domainEvent.PictureId));
+                _pictureReadStore.GetById<PictureReadModel>(domainEvent.PictureId));
             _editBlogPostReadStore.Add(readModel);
         }
     }

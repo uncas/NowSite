@@ -18,14 +18,14 @@ namespace Uncas.NowSite.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<BlogPostReadModel> blogPosts
-                = _blogPostReadStore.GetAll();
+                = _blogPostReadStore.GetAll<BlogPostReadModel>();
             return View(blogPosts);
         }
 
         public ActionResult Details(Guid id)
         {
             BlogPostReadModel blogPost =
-                _blogPostReadStore.GetById(id);
+                _blogPostReadStore.GetById<BlogPostReadModel>(id);
             return View(blogPost);
         }
     }

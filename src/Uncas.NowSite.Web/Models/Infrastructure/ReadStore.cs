@@ -55,29 +55,29 @@ WHERE Id = @Id;
             }
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll<T>()
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
                 var readModel = connection.Query<dynamic>(
                     string.Format("SELECT Id, Model, Created, Modified FROM {0} ORDER BY Created DESC", _modelName));
-                return readModel.Select(Deserialize);
+                return readModel.Select(Deserialize<T>);
             }
         }
 
-        public virtual T GetById(Guid id)
+        public virtual T GetById<T>(Guid id)
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open();
                 return connection.Query<dynamic>(
                     string.Format("SELECT Id, Model, Created, Modified FROM {0} WHERE Id = @Id", _modelName),
-                    new { Id = id }).Select(Deserialize).SingleOrDefault();
+                    new { Id = id }).Select(Deserialize<T>).SingleOrDefault();
             }
         }
 
-        public virtual void Delete(Guid id)
+        public virtual void Delete<T>(Guid id)
         {
             using (var connection = new SQLiteConnection(_connectionString))
             {
@@ -123,7 +123,7 @@ CREATE TABLE {0}
             return _stringSerializer.Serialize(readModel);
         }
 
-        private T Deserialize(dynamic data)
+        private T Deserialize<T>(dynamic data)
         {
             return _stringSerializer.Deserialize<T>(data.Model);
         }

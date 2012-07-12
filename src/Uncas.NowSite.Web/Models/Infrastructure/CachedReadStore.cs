@@ -27,21 +27,21 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
             _cache.Remove(GetAllCacheKey());
         }
 
-        public override void Delete(Guid id)
+        public override void Delete<T>(Guid id)
         {
-            base.Delete(id);
+            base.Delete<T>(id);
             _cache.Remove(GetCacheKey(id));
             _cache.Remove(GetAllCacheKey());
         }
 
-        public override IEnumerable<T> GetAll()
+        public override IEnumerable<T> GetAll<T>()
         {
-            return _cache.Get(GetAllCacheKey(), base.GetAll);
+            return _cache.Get(GetAllCacheKey(), base.GetAll<T>);
         }
 
-        public override T GetById(Guid id)
+        public override T GetById<T>(Guid id)
         {
-            return _cache.Get(GetCacheKey(id), () => base.GetById(id));
+            return _cache.Get(GetCacheKey(id), () => base.GetById<T>(id));
         }
 
         private string GetCacheKey(Guid id)
