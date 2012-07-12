@@ -5,10 +5,9 @@ using Microsoft.Practices.Unity;
 using SimpleCqrs;
 using SimpleCqrs.Eventing;
 using SimpleCqrs.Utilites;
-using Uncas.NowSite.Web.Models.ReadStores;
+using Uncas.NowSite.Web.Models.Infrastructure;
 using Uncas.NowSite.Web.Utilities;
 using Unity.Mvc3;
-using Uncas.NowSite.Web.Models.Infrastructure;
 
 namespace Uncas.NowSite.Web
 {
@@ -46,27 +45,11 @@ namespace Uncas.NowSite.Web
                     c.Resolve<ITypeCatalog>()));
             container.RegisterType<IStringSerializer, JsonStringSerializer>();
             container.RegisterType<ICache, WebCache>();
-            container.RegisterFactory<IBlogPostReadStore>(
-                c => new BlogPostReadStore(
+            container.RegisterFactory<IReadStore>(
+                c => new CachedReadStore(
                     GetDataDirectory("ReadStore.db"),
                     c.Resolve<IStringSerializer>(),
                     c.Resolve<ICache>()));
-            container.RegisterFactory<IBlogPostMasterStore>(
-                c => new BlogPostMasterStore(
-                    GetDataDirectory("ReadStore.db"),
-                    c.Resolve<IStringSerializer>()));
-            container.RegisterFactory<IDeletedBlogPostStore>(
-                c => new DeletedBlogPostStore(
-                    GetDataDirectory("ReadStore.db"),
-                    c.Resolve<IStringSerializer>()));
-            container.RegisterFactory<IPictureReadStore>(
-                c => new PictureReadStore(
-                    GetDataDirectory("ReadStore.db"),
-                    c.Resolve<IStringSerializer>()));
-            container.RegisterFactory<IEditBlogPostReadStore>(
-                c => new EditBlogPostReadStore(
-                    GetDataDirectory("ReadStore.db"),
-                    c.Resolve<IStringSerializer>()));
             return container;
         }
 

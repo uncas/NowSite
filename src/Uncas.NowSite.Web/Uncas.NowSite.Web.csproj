@@ -118,9 +118,7 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="App_Start\MiniProfiler.cs" />
-    <Compile Include="Models\ReadStores\EditBlogPostReadStore.cs" />
     <Compile Include="Models\InputModels\PictureInputModel.cs" />
-    <Compile Include="Models\ReadStores\IEditBlogPostReadStore.cs" />
     <Compile Include="Models\ReadModels\EditBlogPostReadModel.cs" />
     <Compile Include="Models\Aggregates\BlogPostPictures.cs" />
     <Compile Include="Models\Events\PictureAddedToBlogPostEvent.cs" />
@@ -135,13 +133,11 @@
     <Compile Include="Models\Infrastructure\CachedReadStore.cs" />
     <Compile Include="Models\Infrastructure\ICache.cs" />
     <Compile Include="Models\Infrastructure\WebCache.cs" />
-    <Compile Include="Models\ReadStores\DeletedBlogPostStore.cs" />
     <Compile Include="Models\Aggregates\BlogPostState.cs" />
     <Compile Include="Models\Events\BlogPostDeletedEvent.cs" />
     <Compile Include="Models\CommandHandlers\DeleteBlogPostCommandHandler.cs" />
     <Compile Include="Models\Commands\DeleteBlogPostCommand.cs" />
     <Compile Include="Models\ReadModels\DeletedBlogPostModel.cs" />
-    <Compile Include="Models\ReadStores\BlogPostMasterStore.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Models\Events\EditBlogPostStartedEvent.cs" />
@@ -170,18 +166,12 @@
     <Compile Include="Models\Denormalizers\BlogPostDenormalizer.cs" />
     <Compile Include="Models\ReadModels\BlogPostMasterModel.cs" />
     <Compile Include="Models\ReadModels\BlogPostReadModel.cs" />
-    <Compile Include="Models\ReadStores\BlogPostReadStore.cs" />
     <Compile Include="Models\Infrastructure\IReadStore.cs" />
     <Compile Include="Models\Infrastructure\ReadModel.cs" />
     <Compile Include="Models\Infrastructure\ReadStore.cs" />
-    <Compile Include="Models\ReadStores\IDeletedBlogPostStore.cs" />
-    <Compile Include="Models\ReadStores\IBlogPostMasterStore.cs" />
-    <Compile Include="Models\ReadStores\IBlogPostReadStore.cs" />
     <Compile Include="Models\Infrastructure\NowFileEventStore.cs" />
-    <Compile Include="Models\ReadStores\IPictureReadStore.cs" />
     <Compile Include="Models\ReadModels\PictureReadModel.cs" />
     <Compile Include="NowSiteRuntime.cs" />
-    <Compile Include="Models\ReadStores\PictureReadStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\IStringSerializer.cs" />
     <Compile Include="Utilities\JsonStringSerializer.cs" />

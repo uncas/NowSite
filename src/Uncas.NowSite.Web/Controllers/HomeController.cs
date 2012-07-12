@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Uncas.NowSite.Web.Models.Infrastructure;
 using Uncas.NowSite.Web.Models.ReadModels;
-using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly IBlogPostReadStore _blogPostReadStore;
+        private readonly IReadStore _readStore;
 
-        public HomeController(IBlogPostReadStore blogPostReadStore)
+        public HomeController(IReadStore readStore)
         {
-            _blogPostReadStore = blogPostReadStore;
+            _readStore = readStore;
         }
 
         public ActionResult Index()
         {
             IEnumerable<BlogPostReadModel> blogPosts
-                = _blogPostReadStore.GetAll<BlogPostReadModel>();
+                = _readStore.GetAll<BlogPostReadModel>();
             return View(blogPosts);
         }
 
         public ActionResult Details(Guid id)
         {
             BlogPostReadModel blogPost =
-                _blogPostReadStore.GetById<BlogPostReadModel>(id);
+                _readStore.GetById<BlogPostReadModel>(id);
             return View(blogPost);
         }
     }

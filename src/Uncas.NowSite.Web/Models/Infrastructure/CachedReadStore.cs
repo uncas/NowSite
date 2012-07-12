@@ -8,7 +8,7 @@ namespace Uncas.NowSite.Web.Models.Infrastructure
     {
         private readonly ICache _cache;
 
-        protected CachedReadStore(
+        public CachedReadStore(
             string path,
             IStringSerializer stringSerializer,
             ICache cache)

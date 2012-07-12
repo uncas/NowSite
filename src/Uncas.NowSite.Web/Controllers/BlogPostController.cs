@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using SimpleCqrs.Commanding;
 using Uncas.NowSite.Web.Models.Commands;
+using Uncas.NowSite.Web.Models.Infrastructure;
 using Uncas.NowSite.Web.Models.InputModels;
 using Uncas.NowSite.Web.Models.ReadModels;
-using Uncas.NowSite.Web.Models.ReadStores;
 
 namespace Uncas.NowSite.Web.Controllers
 {
@@ -16,30 +16,21 @@ namespace Uncas.NowSite.Web.Controllers
     public class BlogPostController : BaseController
     {
         private readonly ICommandBus _commandBus;
-        private readonly IBlogPostReadStore _blogPostReadStore;
-        private readonly IDeletedBlogPostStore _deletedStore;
-        private readonly IPictureReadStore _pictureReadStore;
-        private readonly IEditBlogPostReadStore _editBlogPostReadStore;
+        private readonly IReadStore _readStore;
 
         public BlogPostController(
             ICommandBus commandBus,
-            IBlogPostReadStore blogPostReadStore,
-            IDeletedBlogPostStore deletedStore,
-            IEditBlogPostReadStore editBlogPostReadStore,
-            IPictureReadStore pictureReadStore)
+            IReadStore readStore)
         {
             _commandBus = commandBus;
-            _blogPostReadStore = blogPostReadStore;
-            _deletedStore = deletedStore;
-            _pictureReadStore = pictureReadStore;
-            _editBlogPostReadStore = editBlogPostReadStore;
+            _readStore = readStore;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
             IEnumerable<DeletedBlogPostModel> deletedPosts =
-                _deletedStore.GetAll<DeletedBlogPostModel>();
+                _readStore.GetAll<DeletedBlogPostModel>();
             return View(deletedPosts);
         }
 
@@ -58,7 +49,7 @@ namespace Uncas.NowSite.Web.Controllers
             var startEdit = new StartEditBlogPostCommand(id);
             _commandBus.Send(startEdit);
             EditBlogPostReadModel blogPost =
-                _editBlogPostReadStore.GetById<EditBlogPostReadModel>(id);
+                _readStore.GetById<EditBlogPostReadModel>(id);
             return View(new EditBlogPostInputModel
             {
                 Id = blogPost.Id,
