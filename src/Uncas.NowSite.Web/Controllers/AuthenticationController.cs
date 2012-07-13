@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Configuration;
+using System.Web.Mvc;
 using System.Web.Security;
 using Uncas.NowSite.Web.Models.InputModels;
 
@@ -15,8 +16,8 @@ namespace Uncas.NowSite.Web.Controllers
         [HttpPost]
         public ActionResult LogOn(LogOnInputModel model)
         {
-            if (model.UserName == "test" &&
-                model.Password == "test123")
+            if (model.UserName == ConfigurationManager.AppSettings["TestUser.UserName"] &&
+                model.Password == ConfigurationManager.AppSettings["TestUser.Password"])
             {
                 FormsAuthentication.SetAuthCookie(model.UserName, true);
                 if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
