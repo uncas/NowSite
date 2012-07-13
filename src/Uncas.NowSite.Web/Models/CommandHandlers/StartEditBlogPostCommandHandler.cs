@@ -1,6 +1,5 @@
 ﻿using SimpleCqrs.Domain;
 using Uncas.NowSite.Web.Controllers;
-using Uncas.NowSite.Web.Models.Aggregates;
 
 namespace Uncas.NowSite.Web.Models.CommandHandlers
 {
@@ -15,9 +14,9 @@ namespace Uncas.NowSite.Web.Models.CommandHandlers
 
         public override void Handle(StartEditBlogPostCommand command)
         {
-            var blogPost = _domainRepository.GetById<BlogPost>(command.Id);
-            blogPost.StartEdit();
-            _domainRepository.Save(blogPost);
+            ActOnExisting(
+                command.Id,
+                blogPost => blogPost.StartEdit());
         }
     }
 }

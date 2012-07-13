@@ -1,5 +1,4 @@
 ﻿using SimpleCqrs.Domain;
-using Uncas.NowSite.Web.Models.Aggregates;
 using Uncas.NowSite.Web.Models.Commands;
 
 namespace Uncas.NowSite.Web.Models.CommandHandlers
@@ -16,10 +15,9 @@ namespace Uncas.NowSite.Web.Models.CommandHandlers
         public override void Handle(
             AddPictureToBlogPostCommand command)
         {
-            var blogPost = _domainRepository.GetById<BlogPost>(
-                command.BlogPostId);
-            blogPost.AddPicture(command.PictureId);
-            _domainRepository.Save(blogPost);
+            ActOnExisting(
+                command.BlogPostId,
+                blogPost => blogPost.AddPicture(command.PictureId));
         }
     }
 }
