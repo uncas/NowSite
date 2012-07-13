@@ -1,2 +1,51 @@
 - links to my profiles etc.
-- 
+
+UI:
+Admin:
+- Fact:
+-- Create new fact: enter fact name
+- Dimension:
+-- Create new dimension: enter dimension name
+- Person attribute:
+-- Create new person attribute: name of attribute plus values for dimensions
+User:
+- Fact:
+-- Get an entry form with a list of all facts
+-- Enter value for a fact for the 'current day': a number
+-- Optional: See an overview of all facts, with the last value, average per week
+-- Optional: For each fact: see a chart of the trends
+- Multi question:
+-- Get an entry form with 5 'multi questions'
+-- A 'multi question' consists of 4 pairs of person attributes
+-- For each 'multi question' the user should choose 1 pair of person attributes as fitting and 1 pair as non-fitting
+
+Number of person attributes required to make this efficient?
+- Each entry form contains 5*4*2 = 40 person attributes
+
+
+
+Commands:
+- AddMultiQuestionAttribute
+- RemoveMultiQuestionAttribute
+- AddFact
+- RemoveFact
+- EnterFact(FactId, value)
+- AnswerMultiQuestion(Attribute1aId, Attribute1bId, Attribute2aId, ..., Choice)
+
+Queries:
+- GetFacts
+- GetMultiQuestions
+
+MultiQuestion:
+- MultiQuestionOption[] Options
+
+MultiQuestionOption:
+- Attributes: two adjectives
+
+MultiQuestionAttribute:
+- DimensionWeights
+
+Dimension:
+- Name
+
+DimensionQuestion:
