@@ -1,5 +1,9 @@
 - links to my profiles etc.
 
+Inspiration:
+- http://www.123test.com/disc-personality-test/
+- http://personality-testing.info/
+
 UI:
 Admin:
 - Fact:
