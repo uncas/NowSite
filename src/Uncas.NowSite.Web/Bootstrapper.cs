@@ -1,4 +1,3 @@
-using System;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
@@ -11,15 +10,16 @@ using Unity.Mvc3;
 
 namespace Uncas.NowSite.Web
 {
-    public class Bootstrapper
+    internal class Bootstrapper
     {
         private readonly ISimpleCqrsRuntime _runtime;
         private readonly IUnityContainer _container;
 
-        public Bootstrapper()
+        internal Bootstrapper()
         {
             _container = BuildUnityContainer();
-            DependencyResolver.SetResolver(new UnityDependencyResolver(_container));
+            DependencyResolver.SetResolver(
+                new UnityDependencyResolver(_container));
             _runtime = new NowSiteRuntime(_container);
             _container.RegisterInstance(
                 typeof(DomainEventReplayer),
@@ -67,17 +67,6 @@ namespace Uncas.NowSite.Web
             return string.Format(
                 @"{0}\..\data\NowSite",
                 path);
-        }
-    }
-
-    public static class UnityExtensions
-    {
-        public static void RegisterFactory<TFrom>(
-            this IUnityContainer container,
-            Func<IUnityContainer, TFrom> factory)
-        {
-            container.RegisterType<TFrom>(
-                new InjectionFactory(x => factory(x)));
         }
     }
 }

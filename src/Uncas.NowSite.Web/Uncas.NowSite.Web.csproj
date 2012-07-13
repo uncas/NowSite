@@ -175,6 +175,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\IStringSerializer.cs" />
     <Compile Include="Utilities\JsonStringSerializer.cs" />
+    <Compile Include="Utilities\UnityExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
