@@ -1,4 +1,8 @@
-- links to my profiles etc.
+Phase 1:
+
+- GetFacts(day)
+- EnterFacts(day, facts)
+
 
 Inspiration:
 - http://www.123test.com/disc-personality-test/
