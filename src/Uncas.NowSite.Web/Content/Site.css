@@ -129,10 +129,21 @@ ul#items li a
     margin: 0.3em;
     padding: 1em;
     text-decoration: none;
-    width: 50px;
 }
 
 ul#items li a:hover
 {
     background-color: #DFDFDF;
+}
+
+
+ul#commits li
+{
+    list-style-type: none;
+    padding: 0 0 1em 0;
+}
+
+ul#commits li div.subject
+{
+    padding: 0.5em;
 }
