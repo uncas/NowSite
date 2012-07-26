@@ -3,7 +3,7 @@ function LoadCustomProperties {
     $script:FtpHost = "ftp.example.com"
     $script:FtpUser = "FtpUser"
     $script:FtpPassword = "FtpPassword"
-    $script:FtpFolder = "new"
+    $script:FtpFolder = "public_html"
 }
 
 function CustomPublish {
