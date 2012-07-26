@@ -4,26 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
-    Blog post details</h2>
+    @Html.DisplayFor(model => model.Title)</h2>
 <fieldset>
-    <div class="display-label">
-        Title</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
-    </div>
-    <div class="display-label">
-        Content</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Content)
     </div>
     <div class="display-label">
-        Created</div>
-    <div class="display-field">
+        Oprettet
         @Html.DisplayFor(model => model.Created)
     </div>
     <div class="display-label">
-        Published</div>
-    <div class="display-field">
+        Offentliggjort
         @Html.DisplayFor(model => model.Published)
     </div>
 </fieldset>

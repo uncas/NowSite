@@ -1,11 +1,11 @@
 ﻿@model Uncas.NowSite.Web.Models.InputModels.LogOnInputModel
 
 @{
-    ViewBag.Title = "Log On";
+    ViewBag.Title = "Log på";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Log On</h2>
+<h2>Log på</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -13,10 +13,10 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Log On</legend>
+        <legend>Log på</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
+            Brugernavn
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.UserName)
@@ -24,7 +24,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
+            Kodeord
         </div>
         <div class="editor-field">
             @Html.PasswordFor(model => model.Password)
@@ -32,7 +32,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Log on" />
+            <input type="submit" value="Log på" />
         </p>
     </fieldset>
 }

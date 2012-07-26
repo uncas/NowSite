@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
-    Blog posts</h2>
+    Nyheder</h2>
 <ul>
     @foreach (var item in Model)
     {
@@ -40,10 +40,10 @@
                 </div>
             }
             <div>
-                Created @Html.DisplayFor(modelItem => item.Created)
+                Oprettet @Html.DisplayFor(modelItem => item.Created)
             </div>
             <div>
-                Published @Html.DisplayFor(modelItem => item.Published)
+                Offentliggjort @Html.DisplayFor(modelItem => item.Published)
             </div>
         </li>
     }
