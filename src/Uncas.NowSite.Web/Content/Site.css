@@ -1,47 +1,48 @@
 body
 {
-    font-size: .85em;
-    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
     background-color: #fff;
+    color: #232323;
+    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+    font-size: .85em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70em;
 }
 
-header,
-footer,
-nav,
-section {
+header, footer, nav, section
+{
     display: block;
 }
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
 
-fieldset 
+fieldset
 {
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
 }
 
-legend 
+legend
 {
-    font-size:1.2em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
-textarea 
+textarea
 {
     min-height: 75px;
 }
 
-.editor-label 
+.editor-label
 {
     margin: 1em 0 0 0;
 }
 
-.editor-field 
+.editor-field
 {
-    margin:0.5em 0 0 0;
+    margin: 0.5em 0 0 0;
 }
 
 
@@ -76,5 +77,42 @@ textarea
 
 .BlogPostPicture img
 {
-    height: 200px;
+    height: 15em;
+}
+
+ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+ul#items
+{
+}
+
+ul#items li
+{
+    border: solid 1px #CFCFCF;
+    list-style-type: none;
+    margin: 0.3em;
+}
+
+ul#items li div
+{
+    display: inline;
+}
+
+ul#items li a
+{
+    background-color: #CFCFCF;
+    line-height: 4em;
+    margin: 0.3em;
+    padding: 1em;
+    text-decoration: none;
+    width: 50px;
+}
+
+ul#items li a:hover
+{
+    background-color: #DFDFDF;
 }

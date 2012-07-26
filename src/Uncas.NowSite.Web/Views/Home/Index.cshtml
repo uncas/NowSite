@@ -1,24 +1,55 @@
 ﻿@{
     ViewBag.Title = "uncas.dk";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var items = new List<dynamic>();
+    items.Add(new
+        {
+            Url = "http://olelynge.blogspot.com",
+            Title = "Blog",
+            Description = "Blog om programmering mm."
+        });
+    items.Add(new
+        {
+            Url = "http://www.fyldepennen.dk/forfatter/?id=609",
+            Title = "Digte",
+            Description = "Digte på fyldepennen.dk"
+        });
+    items.Add(new
+        {
+            Url = "http://stackoverflow.com/users/41094/ole-lynge",
+            Title = "Stackoverflow-profil",
+            Description = "Profil på stackoverflow.com - et q&a-websted om programmering"
+        });
+    items.Add(new
+        {
+            Url = "http://github.com/uncas",
+            Title = "Github",
+            Description = "Profil på github - et websted med kildekode"
+        });
+    items.Add(new
+        {
+            Url = "http://nuget.org/profiles/uncas",
+            Title = "Nuget",
+            Description = "Pakker på nuget"
+        });
 }
 <h2>
     Velkommen til uncas.dk</h2>
 <div>
-    Denne webside tilhører Ole Lynge Sørensen.
+    Mit navn er Ole Lynge Sørensen. Dette websted indeholder dels links til websteder
+    hvor jeg har tilføjet indhold, dels diverse øvrig funktionalitet.
 </div>
-<h4>
-    Other sites</h4>
-<ul>
-    <li><a href="http://olelynge.blogspot.com">Blog</a></li>
-    <li><a href="http://www.fyldepennen.dk/forfatter/?id=609">Digte</a></li>
-</ul>
 <div>
-    <h4>
-        Software development</h4>
-    <ul>
-        <li><a href="http://stackoverflow.com/users/41094/ole-lynge">stackoverflow</a></li>
-        <li><a href="http://github.com/uncas">GitHub</a></li>
-        <li><a href="http://nuget.org/profiles/uncas">NuGet</a></li>
+    <h3>
+        Andre websteder</h3>
+    <ul id="items">
+        @foreach (dynamic item in items)
+        {
+            <li>
+                <div class="link">
+                    <a href="@item.Url">@item.Title</a></div>
+                <div class="description">@item.Description</div>
+            </li>
+        }
     </ul>
 </div>
