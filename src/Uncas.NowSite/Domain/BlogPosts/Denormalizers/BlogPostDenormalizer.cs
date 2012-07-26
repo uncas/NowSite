@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using SimpleCqrs.Eventing;
-using Uncas.NowSite.Web.Models.Events;
-using Uncas.NowSite.Web.Models.Infrastructure;
-using Uncas.NowSite.Web.Models.ReadModels;
+using Uncas.NowSite.Domain.BlogPosts.Events;
+using Uncas.NowSite.Domain.Infrastructure;
+using Uncas.NowSite.Domain.Pictures.Events;
+using Uncas.NowSite.Domain.ReadModels;
 
-namespace Uncas.NowSite.Web.Models.Denormalizers
+namespace Uncas.NowSite.Domain.BlogPosts.Denormalizers
 {
     public class BlogPostDenormalizer :
         IHandleDomainEvents<BlogPostCreatedEvent>,

@@ -1,8 +1,7 @@
 ﻿using SimpleCqrs.Domain;
-using Uncas.NowSite.Web.Models.Aggregates;
-using Uncas.NowSite.Web.Models.Commands;
+using Uncas.NowSite.Domain.BlogPosts.Commands;
 
-namespace Uncas.NowSite.Web.Models.CommandHandlers
+namespace Uncas.NowSite.Domain.BlogPosts.CommandHandlers
 {
     public class CreateBlogPostCommandHandler :
         BlogPostCommandHandler<CreateBlogPostCommand>

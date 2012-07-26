@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Uncas.NowSite.Web.Utilities;
+using Uncas.NowSite.Utilities;
 
-namespace Uncas.NowSite.Web.Models.Infrastructure
+namespace Uncas.NowSite.Domain.Infrastructure
 {
     public class CachedReadStore : ReadStore
     {

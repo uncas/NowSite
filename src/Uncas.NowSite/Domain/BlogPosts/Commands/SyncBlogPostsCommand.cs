@@ -1,6 +1,6 @@
 ﻿using SimpleCqrs.Commanding;
 
-namespace Uncas.NowSite.Web.Models.Commands
+namespace Uncas.NowSite.Domain.BlogPosts.Commands
 {
     /// <summary>
     /// Syncs blog posts.

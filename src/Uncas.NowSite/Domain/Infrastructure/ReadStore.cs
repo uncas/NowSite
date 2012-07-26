@@ -4,9 +4,9 @@ using System.Data.SQLite;
 using System.Linq;
 using Dapper;
 using Uncas.Core;
-using Uncas.NowSite.Web.Utilities;
+using Uncas.NowSite.Utilities;
 
-namespace Uncas.NowSite.Web.Models.Infrastructure
+namespace Uncas.NowSite.Domain.Infrastructure
 {
     public class ReadStore : IReadStore
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Uncas.NowSite.Web.Models.Infrastructure;
+using Uncas.NowSite.Domain.Infrastructure;
 
-namespace Uncas.NowSite.Web.Models.ReadModels
+namespace Uncas.NowSite.Domain.ReadModels
 {
     public class BlogPostReadModel : ReadModel
     {

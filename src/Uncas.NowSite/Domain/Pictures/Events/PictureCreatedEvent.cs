@@ -1,6 +1,6 @@
 ﻿using SimpleCqrs.Eventing;
 
-namespace Uncas.NowSite.Web.Models.Events
+namespace Uncas.NowSite.Domain.Pictures.Events
 {
     public class PictureCreatedEvent : DomainEvent
     {

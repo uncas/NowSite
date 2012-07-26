@@ -1,6 +1,6 @@
 ﻿using SimpleCqrs.Eventing;
 
-namespace Uncas.NowSite.Web.Models.Aggregates
+namespace Uncas.NowSite.Domain.BlogPosts.Events
 {
     public class BlogPostInfoAddedEvent : DomainEvent
     {

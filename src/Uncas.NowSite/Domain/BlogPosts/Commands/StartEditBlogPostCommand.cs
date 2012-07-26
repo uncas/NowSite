@@ -1,7 +1,7 @@
 ﻿using System;
 using SimpleCqrs.Commanding;
 
-namespace Uncas.NowSite.Web.Controllers
+namespace Uncas.NowSite.Domain.BlogPosts.Commands
 {
     public class StartEditBlogPostCommand : ICommand
     {

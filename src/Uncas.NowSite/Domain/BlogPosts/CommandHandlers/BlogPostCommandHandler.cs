@@ -1,9 +1,8 @@
 ﻿using System;
 using SimpleCqrs.Commanding;
 using SimpleCqrs.Domain;
-using Uncas.NowSite.Web.Models.Aggregates;
 
-namespace Uncas.NowSite.Web.Models.CommandHandlers
+namespace Uncas.NowSite.Domain.BlogPosts.CommandHandlers
 {
     public abstract class BlogPostCommandHandler<T> :
        CommandHandler<T> where T : ICommand

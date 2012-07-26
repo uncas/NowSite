@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using Google.GData.Photos;
 using SimpleCqrs.Domain;
-using Uncas.NowSite.Web.Models.Aggregates;
-using Uncas.NowSite.Web.Models.Commands;
+using Uncas.NowSite.Domain.BlogPosts.CommandHandlers;
+using Uncas.NowSite.Domain.Pictures.Commands;
 
-namespace Uncas.NowSite.Web.Models.CommandHandlers
+namespace Uncas.NowSite.Domain.Pictures.CommandHandlers
 {
     public class UploadPictureCommandHandler :
         BlogPostCommandHandler<UploadPictureCommand>

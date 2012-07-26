@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Uncas.NowSite.Web.Utilities
+namespace Uncas.NowSite.Utilities
 {
     public class JsonStringSerializer : IStringSerializer
     {

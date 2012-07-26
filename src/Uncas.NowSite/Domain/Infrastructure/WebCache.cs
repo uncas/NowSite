@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Caching;
 
-namespace Uncas.NowSite.Web.Models.Infrastructure
+namespace Uncas.NowSite.Domain.Infrastructure
 {
     public class WebCache : ICache
     {

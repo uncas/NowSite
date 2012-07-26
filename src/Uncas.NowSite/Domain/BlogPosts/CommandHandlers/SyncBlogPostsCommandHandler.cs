@@ -1,9 +1,9 @@
 ﻿using SimpleCqrs.Commanding;
 using SimpleCqrs.Utilites;
-using Uncas.NowSite.Web.Models.Commands;
-using Uncas.NowSite.Web.Models.Denormalizers;
+using Uncas.NowSite.Domain.BlogPosts.Commands;
+using Uncas.NowSite.Domain.BlogPosts.Denormalizers;
 
-namespace Uncas.NowSite.Web.Models.CommandHandlers
+namespace Uncas.NowSite.Domain.BlogPosts.CommandHandlers
 {
     /// <summary>
     /// Syncs blog posts by replaying events.

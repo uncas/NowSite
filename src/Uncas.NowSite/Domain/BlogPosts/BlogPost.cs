@@ -1,8 +1,8 @@
 ﻿using System;
 using SimpleCqrs.Domain;
-using Uncas.NowSite.Web.Models.Events;
+using Uncas.NowSite.Domain.BlogPosts.Events;
 
-namespace Uncas.NowSite.Web.Models.Aggregates
+namespace Uncas.NowSite.Domain.BlogPosts
 {
     public class BlogPost : AggregateRoot
     {

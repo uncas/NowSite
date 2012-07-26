@@ -1,4 +1,4 @@
-﻿namespace Uncas.NowSite.Web.Utilities
+﻿namespace Uncas.NowSite.Utilities
 {
     public interface IStringSerializer
     {

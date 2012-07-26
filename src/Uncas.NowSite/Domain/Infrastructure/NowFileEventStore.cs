@@ -7,7 +7,7 @@ using SimpleCqrs;
 using SimpleCqrs.Eventing;
 using SimpleCqrs.EventStore.File;
 
-namespace Uncas.NowSite.Web
+namespace Uncas.NowSite.Domain.Infrastructure
 {
     public class NowFileEventStore : IEventStore
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Uncas.NowSite.Web.Models.Infrastructure
+namespace Uncas.NowSite.Domain.Infrastructure
 {
     public interface ICache
     {

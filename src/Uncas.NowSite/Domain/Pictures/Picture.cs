@@ -1,8 +1,8 @@
 ﻿using System;
 using SimpleCqrs.Domain;
-using Uncas.NowSite.Web.Models.Events;
+using Uncas.NowSite.Domain.Pictures.Events;
 
-namespace Uncas.NowSite.Web.Models.Aggregates
+namespace Uncas.NowSite.Domain.Pictures
 {
     public class Picture : AggregateRoot
     {

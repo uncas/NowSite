@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SimpleCqrs.Eventing;
 
-namespace Uncas.NowSite.Web.Models.Events
+namespace Uncas.NowSite.Domain.BlogPosts.Events
 {
     public class BlogPostPublishedEvent : DomainEvent
     {

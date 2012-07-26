@@ -1,7 +1,7 @@
 ﻿using System;
-using Uncas.NowSite.Web.Models.Infrastructure;
+using Uncas.NowSite.Domain.Infrastructure;
 
-namespace Uncas.NowSite.Web.Models.ReadModels
+namespace Uncas.NowSite.Domain.ReadModels
 {
     public class DeletedBlogPostModel : ReadModel
     {

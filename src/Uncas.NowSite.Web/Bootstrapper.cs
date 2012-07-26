@@ -4,7 +4,8 @@ using Microsoft.Practices.Unity;
 using SimpleCqrs;
 using SimpleCqrs.Eventing;
 using SimpleCqrs.Utilites;
-using Uncas.NowSite.Web.Models.Infrastructure;
+using Uncas.NowSite.Domain.Infrastructure;
+using Uncas.NowSite.Utilities;
 using Uncas.NowSite.Web.Utilities;
 using Unity.Mvc3;
 

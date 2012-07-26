@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SimpleCqrs.Domain;
 
-namespace Uncas.NowSite.Web.Models.Aggregates
+namespace Uncas.NowSite.Domain.BlogPosts
 {
     public class BlogPostPictures : Entity
     {

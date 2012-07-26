@@ -5,10 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SimpleCqrs.Commanding;
-using Uncas.NowSite.Web.Models.Commands;
-using Uncas.NowSite.Web.Models.Infrastructure;
+using Uncas.NowSite.Domain.BlogPosts.Commands;
+using Uncas.NowSite.Domain.Infrastructure;
+using Uncas.NowSite.Domain.Pictures.Commands;
+using Uncas.NowSite.Domain.ReadModels;
 using Uncas.NowSite.Web.Models.InputModels;
-using Uncas.NowSite.Web.Models.ReadModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {

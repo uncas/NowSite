@@ -1,7 +1,7 @@
 ﻿using System;
 using SimpleCqrs.Commanding;
 
-namespace Uncas.NowSite.Web.Models.Commands
+namespace Uncas.NowSite.Domain.BlogPosts.Commands
 {
     public class PublishBlogPostCommand : ICommand
     {

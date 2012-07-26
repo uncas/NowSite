@@ -2,7 +2,7 @@
 using System.IO;
 using SimpleCqrs.Commanding;
 
-namespace Uncas.NowSite.Web.Models.Commands
+namespace Uncas.NowSite.Domain.Pictures.Commands
 {
     public class UploadPictureCommand : ICommand
     {

@@ -1,4 +1,4 @@
-﻿namespace Uncas.NowSite.Web.Models.Aggregates
+﻿namespace Uncas.NowSite.Domain.BlogPosts
 {
     public enum BlogPostState
     {
