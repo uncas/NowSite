@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Uncas.NowSite.Web.Models.ReadModels.DeletedBlogPostModel>
+@{
+    ViewBag.Title = "Manage blog posts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Manage blog posts</h2>
+<h3>
+    Sync blog posts</h3>
+<div>
+    Sync blog posts by replaying events:
+    @using (Html.BeginForm("Replay", "BlogPost"))
+    {
+        <input type="submit" value="Sync" />
+    }
+</div>
+<h3>
+    Deleted blog posts</h3>
+<table>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Content
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Content
+            </td>
+            <td>
+                @using (Html.BeginForm(
+                        "Publish",
+                        "BlogPost",
+                        new { id = item.Id }))
+                {
+                    <input type="submit" value="Publish" />
+                }
+            </td>
+        </tr>
+    }
+</table>

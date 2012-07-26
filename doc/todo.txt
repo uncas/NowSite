@@ -1,7 +1,16 @@
 Phase 1:
+Admin:
+- GetFacts
+- AddFact(id, name)
+- RemoveFact(id)
+User:
+- GetDayFacts(day) => with fallback to GetFacts
+- EnterDayFacts(day, dayFacts)
 
-- GetFacts(day)
-- EnterFacts(day, facts)
+Infrastructure:
+- ReadModel with a key which is the day...
+
+==========================================
 
 
 Inspiration:

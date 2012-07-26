@@ -129,16 +129,16 @@
     <Content Include="Views\Authentication\LogOn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\BlogPost\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\BlogPost\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\BlogPost\Index.cshtml" />
+    <Content Include="Views\BlogPost\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\BlogPost\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_MINIPROFILER UPDATED Layout.cshtml" />
@@ -147,6 +147,7 @@
     <Content Include="Web.appSettings.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.appSettings.config.template" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
       <Name>Uncas.NowSite</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

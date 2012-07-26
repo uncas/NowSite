@@ -12,7 +12,6 @@ using Uncas.NowSite.Web.Models.ReadModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {
-    [Authorize]
     public class BlogPostController : BaseController
     {
         private readonly ICommandBus _commandBus;
@@ -26,14 +25,30 @@ namespace Uncas.NowSite.Web.Controllers
             _readStore = readStore;
         }
 
-        [HttpGet]
         public ActionResult Index()
+        {
+            IEnumerable<BlogPostReadModel> blogPosts
+                = _readStore.GetAll<BlogPostReadModel>();
+            return View(blogPosts);
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            BlogPostReadModel blogPost =
+                _readStore.GetById<BlogPostReadModel>(id);
+            return View(blogPost);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Admin()
         {
             IEnumerable<DeletedBlogPostModel> deletedPosts =
                 _readStore.GetAll<DeletedBlogPostModel>();
             return View(deletedPosts);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
@@ -43,6 +58,7 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Edit", new { id });
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
@@ -64,6 +80,7 @@ namespace Uncas.NowSite.Web.Controllers
             });
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(EditBlogPostInputModel model)
         {
@@ -78,6 +95,7 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Delete(Guid id)
         {
@@ -86,6 +104,7 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Publish(Guid id)
         {
@@ -94,6 +113,7 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Replay()
         {
@@ -101,6 +121,7 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult UploadPicture(
             Guid blogPostId,

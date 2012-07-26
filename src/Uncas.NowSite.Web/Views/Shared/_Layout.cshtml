@@ -13,6 +13,7 @@
         <h1>
             @Html.ActionLink("Nu", "Index", "Home")</h1>
         <ul>
+            <li>@Html.ActionLink("News", "Index", "BlogPost")</li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li>Logged on as @User.Identity.Name</li>
@@ -25,7 +26,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <li>@Html.ActionLink("Create blog post", "Create", "BlogPost")</li>
-                <li>@Html.ActionLink("Manage blog posts", "Index", "BlogPost")</li>
+                <li>@Html.ActionLink("Administrate blog posts", "Admin", "BlogPost")</li>
             }
         </ul>
     </div>
@@ -33,21 +34,6 @@
         @RenderBody()
     </div>
     <div id="footer">
-        <h4>
-            Other sites</h4>
-        <ul>
-            <li><a href="http://olelynge.blogspot.com">Blog</a></li>
-            <li><a href="http://www.fyldepennen.dk/forfatter/?id=609">Digte</a></li>
-        </ul>
-        <div>
-            <h4>
-                Software development</h4>
-            <ul>
-                <li><a href="http://stackoverflow.com/users/41094/ole-lynge">stackoverflow</a></li>
-                <li><a href="http://github.com/uncas">GitHub</a></li>
-                <li><a href="http://nuget.org/profiles/uncas">NuGet</a></li>
-            </ul>
-        </div>
     </div>
   @MiniProfiler.RenderIncludes()
 </body>

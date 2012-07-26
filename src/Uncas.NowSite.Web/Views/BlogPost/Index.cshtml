@@ -1,50 +1,50 @@
-﻿@model IEnumerable<Uncas.NowSite.Web.Models.ReadModels.DeletedBlogPostModel>
+﻿@model IEnumerable<Uncas.NowSite.Web.Models.ReadModels.BlogPostReadModel>
 @{
-    ViewBag.Title = "Manage blog posts";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>
-    Manage blog posts</h2>
-<h3>
-    Sync blog posts</h3>
-<div>
-    Sync blog posts by replaying events:
-    @using (Html.BeginForm("Replay", "BlogPost"))
-    {
-        <input type="submit" value="Sync" />
-    }
-</div>
-<h3>
-    Deleted blog posts</h3>
-<table>
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Content
-        </th>
-        <th>
-        </th>
-    </tr>
+    Blog posts</h2>
+<ul>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @item.Title
-            </td>
-            <td>
-                @item.Content
-            </td>
-            <td>
-                @using (Html.BeginForm(
-                        "Publish",
+        <li>
+            <h3>
+                @Html.ActionLink(item.Title, "Details", new { id = item.Id })
+            </h3>
+            <div>
+                @Html.DisplayFor(modelItem => item.Content)
+            </div>
+            @if (item.PrimaryPicture != null)
+            {
+                <div>
+                    <a href="@item.PrimaryPicture.PictureUrl" class="BlogPostPicture">
+                        <img src="@item.PrimaryPicture.PictureUrl" alt="Blog post picture" />
+                    </a>
+                </div>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div>
+                    @Html.ActionLink(
+                        "Edit",
+                        "Edit",
+                        new { Controller = "BlogPost", id = item.Id })
+                    @using (Html.BeginForm(
+                        "Delete",
                         "BlogPost",
                         new { id = item.Id }))
-                {
-                    <input type="submit" value="Publish" />
-                }
-            </td>
-        </tr>
+                    {
+                        <input type="submit" value="Delete" />
+                    }
+                </div>
+            }
+            <div>
+                Created @Html.DisplayFor(modelItem => item.Created)
+            </div>
+            <div>
+                Published @Html.DisplayFor(modelItem => item.Published)
+            </div>
+        </li>
     }
-</table>
+</ul>
