@@ -16,6 +16,7 @@
         <ul id="menu">
             <li>@Html.ActionLink("Forside", "Index", "Home")</li>
             <li>@Html.ActionLink("Nyheder", "Index", "BlogPost")</li>
+            <li>@Html.ActionLink("Ændringer", "Changes", "Home")</li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li>Logget på som @User.Identity.Name</li>

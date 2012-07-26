@@ -8,5 +8,10 @@ namespace Uncas.NowSite.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Changes()
+        {
+            return View();
+        }
     }
 }

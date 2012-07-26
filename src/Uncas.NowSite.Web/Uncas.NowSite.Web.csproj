@@ -148,6 +148,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\CommitHistory.cshtml" />
+    <Content Include="Views\Home\Changes.cshtml" />
     <None Include="Web.appSettings.config.template" />
   </ItemGroup>
   <ItemGroup>
