@@ -11,22 +11,23 @@
 <body>
     <div id="header">
         <h1>
-            @Html.ActionLink("Nu", "Index", "Home")</h1>
-        <ul>
-            <li>@Html.ActionLink("News", "Index", "BlogPost")</li>
+            uncas.dk</h1>
+        <ul id="menu">
+            <li>@Html.ActionLink("Forside", "Index", "Home")</li>
+            <li>@Html.ActionLink("Nyheder", "Index", "BlogPost")</li>
             @if (User.Identity.IsAuthenticated)
             {
-                <li>Logged on as @User.Identity.Name</li>
-                <li>@Html.ActionLink("Log off", "LogOff", "Authentication")</li>
+                <li>Logget på som @User.Identity.Name</li>
+                <li>@Html.ActionLink("Log af", "LogOff", "Authentication")</li>
             }
             else
             {            
-                <li>@Html.ActionLink("Log on", "LogOn", "Authentication")</li>
+                <li>@Html.ActionLink("Log på", "LogOn", "Authentication")</li>
             }
             @if (User.Identity.IsAuthenticated)
             {
-                <li>@Html.ActionLink("Create blog post", "Create", "BlogPost")</li>
-                <li>@Html.ActionLink("Administrate blog posts", "Admin", "BlogPost")</li>
+                <li>@Html.ActionLink("Opret nyhed", "Create", "BlogPost")</li>
+                <li>@Html.ActionLink("Administrér nyheder", "Admin", "BlogPost")</li>
             }
         </ul>
     </div>
@@ -35,6 +36,6 @@
     </div>
     <div id="footer">
     </div>
-  @MiniProfiler.RenderIncludes()
+    @MiniProfiler.RenderIncludes()
 </body>
 </html>

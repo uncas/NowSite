@@ -86,9 +86,29 @@ ul
     padding: 0;
 }
 
-ul#items
+ul#menu li
 {
+    display: inline;
+    list-style-type: none;
+    margin: 0.3em;
 }
+
+ul#menu li a
+{
+    background-color: #CFCFCF;
+    line-height: 4em;
+    margin: 0.3em;
+    padding: 1em;
+    text-decoration: none;
+    width: 50px;
+}
+
+ul#menu li a:hover
+{
+    background-color: #DFDFDF;
+}
+
+
 
 ul#items li
 {
