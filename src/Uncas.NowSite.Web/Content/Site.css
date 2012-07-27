@@ -4,6 +4,7 @@ body
     color: #000000;
     margin: 0 auto;
     max-width: 66em;
+    min-width: 20em;
     padding: 1em;
 }
 
