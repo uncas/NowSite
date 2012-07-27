@@ -9,10 +9,15 @@ namespace Uncas.NowSite.Web.Controllers
             return View();
         }
 
-        [OutputCache(Duration = 600)]
         public ActionResult Changes()
         {
             return View();
+        }
+
+        [OutputCache(Duration = 600)]
+        public ActionResult CommitHistory()
+        {
+            return PartialView();
         }
     }
 }
