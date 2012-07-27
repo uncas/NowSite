@@ -2,7 +2,7 @@ body
 {
     background-color: #FFFFFF;
     color: #000000;
-    margin: 0 auto;
+    margin: 0.5em auto;
     padding: 0 1em;
     width: 65em;
 }
@@ -22,6 +22,12 @@ header, footer, nav, section
     background-color: #FFE6E6;
     color: #000000;
     padding: 0 1em 1em;
+
+    /* Rounded corners: */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #FFE6E6;
 }
 
 /* Styles for basic forms
