@@ -24,9 +24,9 @@ header, footer, nav, section
     padding: 0 1em 1em;
 
     /* Rounded corners: */
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    -moz-border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    border-radius: 0.7em;
     border: 1px solid #FFE6E6;
 }
 
@@ -114,11 +114,16 @@ ul#menu li
 ul#menu li a
 {
     background-color: #CFCFCF;
-    line-height: 4em;
+    line-height: 3em;
     margin: 0.3em;
-    padding: 1em;
+    padding: 0.5em 0.7em;
     text-decoration: none;
-    width: 50px;
+
+    /* Rounded corners: */
+    -moz-border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    border-radius: 0.7em;
+    border: 1px solid #CFCFCF;
 }
 
 ul#menu li a:hover
@@ -130,7 +135,6 @@ ul#menu li a:hover
 
 ul#items li
 {
-    border: solid 1px #CFCFCF;
     list-style-type: none;
     margin: 0.3em;
 }
@@ -143,10 +147,16 @@ ul#items li div
 ul#items li a
 {
     background-color: #CFCFCF;
-    line-height: 4em;
+    line-height: 3em;
     margin: 0.3em;
-    padding: 1em;
+    padding: 0.5em;
     text-decoration: none;
+
+    /* Rounded corners: */
+    -moz-border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    border-radius: 0.7em;
+    border: 1px solid #CFCFCF;
 }
 
 ul#items li a:hover
