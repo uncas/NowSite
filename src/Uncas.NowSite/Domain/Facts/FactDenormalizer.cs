@@ -6,7 +6,9 @@ using Uncas.NowSite.Domain.ReadModels;
 namespace Uncas.NowSite.Domain.Facts
 {
     public class FactDenormalizer :
-        IHandleDomainEvents<FactCreatedEvent>
+        IHandleDomainEvents<FactCreatedEvent>,
+        IHandleDomainEvents<FactNameChangedEvent>,
+        IHandleDomainEvents<FactDeletedEvent>
     {
         private readonly IReadStore _readStore;
 
@@ -23,6 +25,20 @@ namespace Uncas.NowSite.Domain.Facts
                 Id = domainEvent.AggregateRootId,
                 Name = domainEvent.Name
             });
+        }
+
+        public void Handle(FactNameChangedEvent domainEvent)
+        {
+            var fact = _readStore.GetById<FactReadModel>(
+                domainEvent.AggregateRootId);
+            fact.Name = domainEvent.Name;
+            _readStore.Add(fact);
+        }
+
+        public void Handle(FactDeletedEvent domainEvent)
+        {
+            _readStore.Delete<FactReadModel>(
+                domainEvent.AggregateRootId);
         }
     }
 }

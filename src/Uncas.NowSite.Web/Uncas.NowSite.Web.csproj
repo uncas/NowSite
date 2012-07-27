@@ -161,6 +161,7 @@
     <Content Include="Views\Home\Changes.cshtml" />
     <Content Include="Views\Fact\Index.cshtml" />
     <Content Include="Views\Fact\Create.cshtml" />
+    <Content Include="Views\Fact\Edit.cshtml" />
     <None Include="Web.appSettings.config.template" />
   </ItemGroup>
   <ItemGroup>

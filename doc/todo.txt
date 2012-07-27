@@ -3,8 +3,8 @@ Phase 1:
 Fact:
 X Index: list facts
 X Create: id, name
-- Delete: id
-- Edit: id, name
+X Delete: id
+X Edit: id, name
 
 DayFact:
 - Index: List last 7 days

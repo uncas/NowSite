@@ -96,6 +96,12 @@
     <Compile Include="Domain\BlogPosts\CommandHandlers\StartEditBlogPostCommandHandler.cs" />
     <Compile Include="Domain\BlogPosts\CommandHandlers\SyncBlogPostsCommandHandler.cs" />
     <Compile Include="Domain\BlogPosts\Denormalizers\BlogPostDenormalizer.cs" />
+    <Compile Include="Domain\Facts\CommandHandlers\DeleteFactCommandHandler.cs" />
+    <Compile Include="Domain\Facts\CommandHandlers\EditFactCommandHandler.cs" />
+    <Compile Include="Domain\Facts\Commands\DeleteFactCommand.cs" />
+    <Compile Include="Domain\Facts\Commands\EditFactCommand.cs" />
+    <Compile Include="Domain\Facts\Events\FactDeletedEvent.cs" />
+    <Compile Include="Domain\Facts\Events\FactNameChangedEvent.cs" />
     <Compile Include="Domain\Facts\FactDenormalizer.cs" />
     <Compile Include="Domain\Facts\CommandHandlers\CreateFactCommandHandler.cs" />
     <Compile Include="Domain\Facts\Fact.cs" />

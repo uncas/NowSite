@@ -26,11 +26,6 @@ namespace Uncas.NowSite.Web.Controllers
             return View(facts);
         }
 
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         public ActionResult Create()
         {
             return View();
@@ -44,44 +39,24 @@ namespace Uncas.NowSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var fact = _readStore.GetById<FactReadModel>(id);
+            return View(fact);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EditFactCommand command)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View();
+            _commandBus.Send(command);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(DeleteFactCommand command)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _commandBus.Send(command);
+            return RedirectToAction("Index");
         }
     }
 }
