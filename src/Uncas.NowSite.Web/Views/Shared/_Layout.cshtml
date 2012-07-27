@@ -21,17 +21,17 @@
             <li>@Html.ActionLink("Ændringer", "Changes", "Home")</li>
             @if (User.Identity.IsAuthenticated)
             {
+                <li>@Html.ActionLink("Facts", "Index", "Fact")</li>
+                <li>@Html.ActionLink("Nyheds-admin", "Admin", "BlogPost")</li>
+                <li><a href="/elmah" target="_blank">Fejl</a></li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
                 <li>@Html.ActionLink("Log '" + User.Identity.Name + "' af", "LogOff", "Authentication")</li>
             }
             else
             {            
                 <li>@Html.ActionLink("Log på", "LogOn", "Authentication")</li>
-            }
-            @if (User.Identity.IsAuthenticated)
-            {
-                <li>@Html.ActionLink("Opret nyhed", "Create", "BlogPost")</li>
-                <li>@Html.ActionLink("Administrér nyheder", "Admin", "BlogPost")</li>
-                <li><a href="/elmah">Fejl</a></li>
             }
         </ul>
     </div>

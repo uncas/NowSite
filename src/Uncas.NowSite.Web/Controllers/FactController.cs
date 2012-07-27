@@ -7,6 +7,7 @@ using Uncas.NowSite.Domain.ReadModels;
 
 namespace Uncas.NowSite.Web.Controllers
 {
+    [Authorize]
     public class FactController : Controller
     {
         private readonly ICommandBus _commandBus;
