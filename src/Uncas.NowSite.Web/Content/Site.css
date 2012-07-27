@@ -1,17 +1,27 @@
 body
 {
-    background-color: #fff;
-    color: #232323;
-    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
-    font-size: .85em;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70em;
+    background-color: #FFFFFF;
+    color: #000000;
+    margin: 0 auto;
+    padding: 0 1em;
+    width: 65em;
 }
 
 header, footer, nav, section
 {
     display: block;
+}
+
+#header, #content, #footer
+{
+    padding: 0.2em;
+}
+
+#header
+{
+    background-color: #FFE6E6;
+    color: #000000;
+    padding: 0 1em 1em;
 }
 
 /* Styles for basic forms
@@ -75,10 +85,12 @@ textarea
     display: none;
 }
 
+
 .BlogPostPicture img
 {
     height: 15em;
 }
+
 
 ul
 {
