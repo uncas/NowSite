@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0"?>
 <appSettings>
   <add key="ClientValidationEnabled" value="true" />
+  <add key="elmah.mvc.disableHandler" value="false" />
+  <add key="elmah.mvc.requiresAuthentication" value="true" />
+  <add key="elmah.mvc.allowedRoles" value="*" />
   <add key="GoogleAccount.UserName" value="username@gmail.com" />
   <add key="GoogleAccount.Password" value="pwd" />
   <add key="TestUser.UserName" value="testuser" />
