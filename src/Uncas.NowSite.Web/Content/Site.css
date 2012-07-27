@@ -2,9 +2,9 @@ body
 {
     background-color: #FFFFFF;
     color: #000000;
-    margin: 0.5em auto;
-    padding: 0 1em;
-    width: 65em;
+    margin: 0 auto;
+    max-width: 66em;
+    padding: 1em;
 }
 
 header, footer, nav, section
