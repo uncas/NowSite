@@ -1,18 +1,20 @@
-
-
-======================
-
 Phase 1:
-Admin:
-- GetFacts
-- AddFact(id, name)
-- RemoveFact(id)
-User:
-- GetDayFacts(day) => with fallback to GetFacts
-- EnterDayFacts(day, dayFacts)
 
-Infrastructure:
-- ReadModel with a key which is the day...
+Fact:
+X Index: list facts
+X Create: id, name
+- Delete: id
+- Edit: id, name
+
+DayFact:
+- Index: List last 7 days
+- Day(day): get facts for a given day
+- Enter(day, dayFacts): enter facts for a given day, only possible for last 7 days
+
+ReadModels:
+- FactsForDayReadModel: date, list of fact+value
+=> I'm going to learn how to update these beasts...
+
 
 ==========================================
 

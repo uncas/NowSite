@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="App_Start\ElmahMvc_Start.cs" />
     <Compile Include="App_Start\MiniProfiler.cs" />
+    <Compile Include="Controllers\FactController.cs" />
     <Compile Include="Models\InputModels\PictureInputModel.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -158,6 +159,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CommitHistory.cshtml" />
     <Content Include="Views\Home\Changes.cshtml" />
+    <Content Include="Views\Fact\Index.cshtml" />
+    <Content Include="Views\Fact\Create.cshtml" />
     <None Include="Web.appSettings.config.template" />
   </ItemGroup>
   <ItemGroup>
