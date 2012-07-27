@@ -21,8 +21,7 @@
             <li>@Html.ActionLink("Ændringer", "Changes", "Home")</li>
             @if (User.Identity.IsAuthenticated)
             {
-                <li>Logget på som @User.Identity.Name</li>
-                <li>@Html.ActionLink("Log af", "LogOff", "Authentication")</li>
+                <li>@Html.ActionLink("Log '" + User.Identity.Name + "' af", "LogOff", "Authentication")</li>
             }
             else
             {            
