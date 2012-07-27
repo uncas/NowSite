@@ -22,8 +22,6 @@ header, footer, nav, section
     background-color: #FFE6E6;
     color: #000000;
     padding: 0 1em 1em;
-
-    /* Rounded corners: */
     -moz-border-radius: 0.7em;
     -webkit-border-radius: 0.7em;
     border-radius: 0.7em;
@@ -118,8 +116,6 @@ ul#menu li a
     margin: 0.3em;
     padding: 0.5em 0.7em;
     text-decoration: none;
-
-    /* Rounded corners: */
     -moz-border-radius: 0.7em;
     -webkit-border-radius: 0.7em;
     border-radius: 0.7em;
@@ -151,8 +147,6 @@ ul#items li a
     margin: 0.3em;
     padding: 0.5em;
     text-decoration: none;
-
-    /* Rounded corners: */
     -moz-border-radius: 0.7em;
     -webkit-border-radius: 0.7em;
     border-radius: 0.7em;
@@ -174,4 +168,21 @@ ul#commits li
 ul#commits li div.subject
 {
     padding: 0.5em;
+}
+
+
+ul#blogposts li
+{
+    list-style-type: none;
+    margin: 0.3em 0;
+    padding: 0 0.6em 0.6em;
+    -moz-border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    border-radius: 0.7em;
+    border: 1px solid #CFCFCF;
+}
+
+ul#blogposts li div.content
+{
+    margin: 0 0 0.5em;
 }
