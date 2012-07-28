@@ -48,6 +48,7 @@ legend
 textarea
 {
     min-height: 75px;
+    width: 100%;
 }
 
 .editor-label
